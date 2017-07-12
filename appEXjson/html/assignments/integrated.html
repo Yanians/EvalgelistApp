@@ -1,0 +1,343 @@
+<!-- <h1 style="color: red;">NOT UP TO DATE</h1> -->
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/google/code-prettify/master/src/prettify.css">
+<style>
+code, pre {
+    font-size: 0.85em;
+}
+
+table {
+     border: 2pt solid black;
+     border-collapse: collapse;
+     font-size: 80%;
+}
+
+td {
+     padding: 1em;
+     border: 1pt solid grey;
+}
+
+tr.double {
+     border-top: 3pt double black;
+}
+
+.warning {
+    background-color: #ff5555;
+    padding: 0.5em;
+    width: 80%;
+    border-radius: 1em;
+    border: 1px solid black;
+    text-align: center;    
+    margin: auto;
+}
+
+</style>
+
+<div onload="prettyPrint()">
+
+<p>
+In this assignment you will integrate your frontend and backend web applications.
+</p>
+Currently the backend server only supports headlines and articles, and these are
+stored as inmemory data structures.  Heroku requires our server to reboot every day.
+Therefore articles and headlines are not persistant day to day.
+Our solution for this is to use a database to persist state.  
+We will use MongoDB as our database of choice for this assignment.
+</p>
+<p>In addition to adding a persistent document store, we
+will implement the bulk of the functionality for our backend server.
+The only thing we do not implement in this assignment is the handling of uploading images.
+Therefore we continue to accept only text-only articles and do not implement 
+the functionality of <code>PUT /avatar</code> in this assignment.
+</p>
+<p>
+The final piece of this assignment is to direct our frontend webapp to use our backend
+server instead of the dummy server, thereby integrating our social networking application.
+</p>
+
+<h2>Getting Started</h2>
+
+<p>There are several key pieces to this assignment, and these pieces can 
+be taken in any order.  I divide up the problem into:
+<ol>
+  <li>Authentication (login, logout, new user registration, password changing)</li>
+  <li>Integrating headlines and articles with mongo</li>  
+  <li>Edit articles, add comments, edit comments</li>
+  <li>Profile editing of email and zipcode</li>
+  <li>Add, remove, and list followed users</li>
+</ol>
+<p>All will require a working document store for persistence.  It therefore behooves you
+to setup your mongo instance first.  After that you can take the above pillars
+of the assignment in any order.</p>
+
+<p>
+Follow these <a target=_blank href="data/database.html">database instructions</a> 
+for setting up your MongoDB instance and connecting it to your backend server
+if you have not already completed this as part of an inclass assignment.
+</p>
+
+<!-- ******************************************************************** -->
+<h3>Aside on Middleware</h3>
+
+<p>Node is all about middleware.  Middleware are functions inserted between the server and the endpoint handler that have three arguments, request, response, and next, which is a "pointer" to the next piece of middleware or endpoint.  In <code>index.js</code> we see examples of functions in the request-reponse pipeline with two arguments, request and response.  These are endpoints -- they do not have a <code>next</code> function to pass on to.  A middleware function might look like this:</p>
+<pre class="prettyprint lang-javascript">
+function isLoggedIn(req, res, next) {   
+    var id = req.cookies['sessionId']    
+    ...
+    req.user = ...
+    return next()
+}
+</pre>
+<p>To use this middleware we can either <code>app.use(isLoggedIn)</code> &quot;globally&quot; on all of our endpoints (bearing in mind that <code>app.use()</code> is applied in order) or on individual endpoints like this:</p>
+<pre class="prettyprint lang-javascript">
+    app.put('/logout', isLoggedIn, logout)
+</pre>
+<p>we can chain together as many pieces of middleware as we want.</p>
+<p>Here <code>isLoggedIn</code> is placing on the request object the currently logged in user information.  This
+way the currently logged in user will be accessible from downstream endpoint functions.</p>
+<p>You are encouraged to add the isLoggedIn middleware to ensure that users are properly logged in before 
+using your service.  If you work on the other endpoints before authentication, then you can still have
+isLoggedIn, but it just won't do anything other than provide a default user on the request object.</p>
+
+<!-- ******************************************************************** -->
+<!-- ******************************************************************** -->
+<!-- ******************************************************************** -->
+
+<h2>Implementing Endpoints</h2>
+
+<p>Even if we have not yet implemented fully the <code>isLoggedIn</code>
+middleware, you should stub the function and add it to all routes.
+This will assure that all requests are made by authenticated clients.<p>
+
+<pre class="prettyprint lang-javascript">
+// this is profile.js which contains all user profile 
+// information except passwords which is in auth.js
+moodule.exports = (app) => {
+    app.get('/headlines/:users*?', isLoggedIn, getHeadlines)
+}
+</pre>
+The API for the endpoints is the same as for the dummy server 
+(i.e., this way we don't need to change any of the frontend code).  That api is found here
+<center><a target="_blank" href="data/api.html#api">Backend API list of endpoints</a></center>
+<p>We will implement all of the endpoints except <code>GET /sample</code> and
+<code>PUT /avatar</code>.  Additionally, we still only accept new articles with text only, no pictures.
+</p>
+<p>
+If we were doing TDD then we would write tests for each function before we write the implementation.  
+Given that you have some experience in writing tests, 
+I recommend you do this, but it will not be a requirement
+for this assignment.  Additionally, we already have a working frontend with end-to-end tests 
+which can serve us well in testing our backend functionality.  (But again, unit testing the 
+backend separately is the preferred approach.)
+</p>
+<p>Previously our headline and article endpoints used an in-memory data structure
+for storage.  Now we change these to use our mongodb document store.
+Follow the inclass slides and exercises as examples for how to do this.
+I would perform the implementation file by file, i.e., all of <code>profile.js</code>
+then <code>following.js</code> then <code>article.js</code> and finally <code>auth.js</code> --
+but you can implement in any order you desire.
+<p>
+
+<p>During implementation I would make use of either the command line program <code>curl</code>
+or a browser plugin such as Advanced REST Client to test my server during development.
+Alternatively you could use your already working frontend webapp (pointing it to you locally
+running backend server) to perform the requests.</p>
+
+<h2>Authentication</h2>
+
+<p>Users must be authenticated to use the backend.  They authenticate by supplying their
+username and password in a payload to <code>POST /login</code> which if successfully
+authenticated will return a cookie.  The cookie will be passed on all subsequent requests
+until the cookie expires or the user makes a request to <code>PUT /logout</code> which deletes the cookie.</p>
+
+<p>Before we can log a user in we need to either hardcode an account in the mongo document
+store, or implement new user registration.  
+Note that we will use salted passwords for our authentication and we will write the implementation
+of salting and hashing ourselves (you are <strong>not</strong> to use third-party modules that 
+do all of this for you such as the popular <code>session</code> module).</p>
+
+<h4>Registration</h4>
+<p>
+The register endpoint will add two new documents to your mongodb, one to the
+users collection with a username, a randomly created salt, and the hash of the user's salted password.
+The other is the user's profile information, including a default status message, an empty list of followed
+users, and a default picture.</p>
+<p>
+Something to consider: We <em>could</em>
+make an Object with behavior in which case <code>new User()</code> would create a user
+and then it could have a function <code>getHash()</code> but this is not necessary.
+I would just implement a separate function that given a password and salt provides the hash.
+This function will then be called during new user registration, when a user logs in, and when
+a user changes their password.
+</p>
+
+<h4>Salting</h4>
+<p>
+The salt should be a random string, perhaps a combination of the user's username and the current time, 
+maybe even the hash of that combination.
+You are allowed to use the <code>md5</code> library or if you prefer you can use <code>bcrypt</code> which
+is a popular encryption library.  
+For either library use "<code>npm install ... --save</code>" so that the dependency
+is stored in your <code>package.json</code> file.
+</p>
+
+<h4>Sessions</h4>
+<p>
+Whereas the register endpoint saves new documents to mongo, 
+the login endpoint looks up a record in the mongo database based on the logging in user's username.
+Then using the salt from the record, compute the hash from the user's password 
+and compare with the hash from the record.
+If they match then create a session for the user.  
+Store the session in a map from session key to user.
+Here is an example that attempts to create unique session keys for users
+</p>
+<pre class="prettyprint lang-javascript">
+// this is in auth.js
+const sessionUser = {}
+const cookieKey = 'sid'
+
+function login(...) {
+
+    // get the record from the database by username
+    const userObj = getUser(...username...)
+
+    // "security by obscurity" we don't want people guessing a sessionkey
+    const sessionKey = md5(mySecretMessage + new Date().getTime() + userObj.username)
+    sessionUser[sessionKey] = userObj
+
+    // this sets a cookie
+    res.cookie(cookieKey, sessionKey, { maxAge: 3600*1000, httpOnly: true})
+</pre>
+<p>we store the session key in a cookie for the user.  Note that the sessionUser
+map really should be a <em>least recently used</em> (LRU) map, otherwise it is a potential memory hog!
+Later we will migrate this to use a distributed memory store to alleviate this difficulty.  For now
+just use an inmemory map as shown here and don't worry about LRU.</p>
+
+<h4>isLoggedIn</h4>
+<p>Now we can update the <code>isLoggedIn</code> middleware to grab the cookie from the request (if it exists),
+and lookup in sessionUser the corresponding user, adding it to the request object for the downstream endpoints.  
+If there is none, or the cookie did not exist, then the user is not logged in and we should respond with a 401 Unauthorized.
+</p>
+<p>When a user logs out, remove their sessionKey from the sessionUser map and clear/delete the cookie in the response object.</p>
+
+
+
+<h2>Cross-Origin Resource Sharing</h2>
+
+<p>The browser has a same-origin policy.  Which means it will only allow javascript to transfer
+data from the same origin.  I.e., I visit site A and can run JavaScript that accesses data from site A, but it cannot access data from site B.  By access data I mean make an AJAX request.  The browser will only allow cross-origin resource sharing if the other origin (site B) allows for it.  
+See the lecture on security to visualize what it going on.  
+From that lecture you should recognize that it's your backend that needs to supply the headers in it's response to the client.  
+Look again at that lecture to find what response headers should look like.</p>
+
+<p>The frontend and backend have different origins.  When running locally you might have the 
+frontend running on port 8080 and the backend served up on port 3000.
+Therefore we need to enable CORS for the AJAX calls to complete without the browser rejecting them.  
+You'll want to create a middleware function that adds these response headers to every request.  
+<em>If</em> you were to only use it on some requests, then you could put the middleware in the middle of an endpoint call:</p>
+<pre class="prettyprint lang-javascript">
+app.get('/articles', enableCORS, getArticles)
+</pre>
+but we want to add middleware to <em>all</em> calls, and therefore instead have 
+<pre class="prettyprint lang-javascript">
+app.use(enableCORS)
+</pre>
+<p>where <em>enableCORS</em> is a middleware function that <em>you</em> 
+write (do <u>not</u> use third party middleware for this part of the assignment).  
+See the lecture on security for the inclass exercise enabling CORS.</p>
+<p>You should enable CORS globally: whatever origin requests data, you should allow a response.  I.e., 
+<u>you should not hardcode a domain.</u></p>
+
+<h3>Sending text-only articles from the frontend</h3>
+
+<p>Note that our <code>POST /article</code> endpoint will only be accepting
+text at the current moment.  I.e., no picture uploads.  Therefore the frontend
+application needs to be modified to <em>not</em> send formData.  For example,
+if we already had a method <code>addArticle</code> 
+then we would rename it <code>addArticleWithImage</code> and make a new <code>addArticle</code>.
+This way we can easily switch back to the formData upload for the final assignment
+when image uploading is enabled on the backend.</p>
+
+<h3>Integrating with the Frontend</h3>
+
+<p>
+Now that your server has enabled CORS you should be able to point your frontend at your backend.
+In your frontend webapp, change the server URL from the dummy server address to your locally running
+backend server (i.e., http://localhost:3000).  Verify that your frontend is functional (e.g., logging in and out).
+Verify that your backend is functional (check for error messages in the console).  
+When you are satisfied with the backend functionality, push your backend to Heroku.  
+Now adjust your locally running frontend to access your deployed backend on Heroku.  
+Again, verify that your frontend is functional. 
+</p>
+<p class="warning">
+Do NOT push your updated frontend to Surge using the same app name as for the previous assignment.
+Do NOT push your updated backend to Heroku using the same app name as for the previous assignment.
+</p>
+<p>Your "working" frontend talking to the dummy server is being used for reviews.
+So as to not disrupt the review process (i.e., you would have unhappy users) 
+create a <em>new</em> Heroku application name for your backend and use a different
+url for your frontend.  
+For Heroku, you can do this by typing "<code>heroku create newappname</code>" be sure
+to change "newappname" to either your desired name for your application
+or leave blank and Heroku will assign you a name.</p>
+<p>After you have your new frontend app setup locally, push it to Surge.  
+Now verify that your newly deployed frontend is functional with your deployed backend.
+Your old frontend app should be unchanged and continue to talk to the dummy server.
+</p>
+<p>
+Notice in all of this that we make iterative changes step-by-step and do not jump to a fully deployed+deployed 
+setup.  In this way we control our rollout and can identify problems and their source as we go along.
+</p>
+
+<!-- *********************************************************** -->
+<!-- *********************************************************** -->
+<!-- *********************************************************** -->
+<h1>Requirements</h1>
+
+<p>Submit a <code>README.json</code> that has contents similar to this</p>
+<pre style="border: 1px solid black; padding: 0.5em;">
+{ 
+     "netid": "sep1",
+  "frontend": "https://ricebookapp.surge.sh",
+   "backend": "https://ricebookserver.herokuapp.com"
+}
+</pre>
+<p>replace "ricebookapp" and "ricebookserver" with the names of your frontend and backend applications, and replace "sep1" with your netID.
+The "frontend" entry shoudl be your <em>new</em> frontend application different from the one submitted in the previous assignment.
+Same with the "backend" entry.</p>
+
+<p>Verify again that your deployed frontend application works with your backend server.  
+An automated grading robot will use your deployed frontend app and it's interoperability with the backend server when grading.
+</p>
+
+<h3>Integrated Web Application</h3>
+<ul>
+    <li>A file <code>README.json</code> that has your frontend and backend URLs along with netid</li>
+    <li>Newly deployend frontend webapp that communicates with deployed backend</li>
+    <li>Backend implements <strong>all</strong> endpoints, except <code>/sample</code>, only has a stub for <code>PUT /avatar</code>, 
+        and does not need to accept articles with pictures.</li>
+    <li>Each password entry has a unique salt, i.e., a new salt is generated for each new password</li>
+    <li>Content (headline, profile info, followers, articles, etc) is only viewable by logged in users</li>
+    <li>When users logout then must login again to view content (i.e., be sure to delete the cookie)</li>
+    <li>Your test user account can login with the three-word-passphrase for the dummy server previously supplied (this will be used by the gradebot) -- i.e., be sure to register your test user an account!</li>
+    <li>There are at least 10 preloaded articles viewable by <em>your</em> test user</li>    
+    <li>There are at least 3 comments on the articles viewable by <em>your</em> test user, at least two comments on one article and one comment on a different article.</li>
+    <li><b>There is NO requirement on the authors of the articles returned to the frontend.  I.e., GET /articles can return all the articles in the database for <em>this</em> assignment.</b></li>
+</ul>
+
+<h2>What to submit</h2>
+
+<p>Similar to the previous assignment,
+you will submit two repos to two submission selections on the grading site.
+Be sure you update your README.json in both repos to the two new sites.</p>
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+
+<hr>
+</div>
+
+

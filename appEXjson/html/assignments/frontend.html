@@ -1,0 +1,326 @@
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/google/code-prettify/master/src/prettify.css">
+<style>
+code, pre {
+    font-size: 0.85em;
+}
+</style>
+
+<div onload="prettyPrint()">
+
+<p>
+In this assignment you will partially implement and test the frontend of your web application.  
+We start with our draft frontend application that contains three views integrated
+into a single page application (SPA) 
+<ul>
+  <li>landing page with registration and login</li>
+  <li>main page with articles, followers, and headline message</li>
+  <li>profile page for a user to upload a new profile picture and edit their user data</li>
+</ul>
+Remember that when tackling any large task our best approach is to divide and conquer.  For 
+this assignment there are two major portions:
+<ol>
+	<li>Writing unit tests of the desired functionality and mocking the dummy server endpoints.</li>
+	<li>Implementing logic for our site and connecting to the dummy server.</li>
+</ol>
+<a target=_blank href="https://jsbin.com/jeliroluni/edit?js,output">
+Here is an example that should help you get started communicating with the dummy server.</a>
+</p>
+
+<h3>Test Driven Development</h3>
+
+<p>We will exercise test driven development 
+	instead of writing the implementation of our web app first and testing later.
+Therefore before we implement anything we will first write tests for our functionality.  In this
+way the desired behavior will drive our implementation and design.
+Start by writing Mocha unit tests for the desired behavior and 
+execute the test suite as we develop.
+</p>
+
+<h4>Unit Tests</h4>
+
+<p>Every user interaction point should be validated.  Most user interactions involve
+making an AJAX call to the server to update data.  In our test environment we will
+not want to contact the real server, and therefore want to intercept the AJAX requests 
+and provide our own mocked response.
+</p>
+<p>
+For our first test we will simulate the user entering a new status message, which will
+be sent to the server for persistence.  We completed a similar task as part of an inclass exercise.
+Note that in the inclass exercise we were not using React.  Therefore we had to insert values into
+the text inputs before executing the updateHeadline function.  
+In your React+Redux application we test
+separately the React view and the Redux action.</p>
+
+<p>We want to mock calls to fetch which is our engine for AJAX.  If you are using Karma
+to run your tests, then webpack can alias isomorphic-fetch
+to mock-fetch.  Otherwise if you use Mocha directly
+then we need to substitute in the runtime mock-fetch
+for the fetch coming from isomorphic-fetch, which is 
+supplied by node-fetch.  In the following I provide you
+an example of doing this using <code>mockery</code></p>
+<pre class="prettyprint lang-javascript">
+import { expect } from 'chai'
+import mockery from 'mockery'
+import fetch, { mock } from 'mock-fetch'
+
+import * as profileActions from './profileActions'
+
+...
+
+let Action, actions
+beforeEach(() => {
+  if (mockery.enable) {
+	mockery.enable({warnOnUnregistered: false, useCleanCache:true})
+	mockery.registerMock('node-fetch', fetch)
+	require('node-fetch')
+  }
+  Action = require('./actions').default
+  actions = require('./actions')
+})
+
+afterEach(() => {
+  if (mockery.enable) {
+	mockery.deregisterMock('node-fetch')
+	mockery.disable()
+  }
+})
+
+it('should update the status message', (done) => {
+  
+  // the result from the mocked AJAX call
+  const username = 'sep1test'
+  const headline = 'A new headline!'
+
+  mock(`${url}/headline`, {
+  	method: 'PUT',
+  	headers: {'Content-Type':'application/json'},
+  	json: { username, headline }
+  })
+
+  // review how complex actions work in Redux
+  // updateHeadline returns a complex action
+  // the complex action is called with dispatch as an argument
+  // dispatch is then called with an action as an argument
+
+  profileActions.updateHeadline('does not matter')(
+  	fn => fn(action => {
+	  expect(action).to.eql({ 
+	  	headline, type: actions.UPDATE_PROFILE
+	  })
+	  done()
+  	}))
+
+})
+</pre>
+<p>
+We use mockery to substitute mock-fetch in place of node-fetch.
+node-fetch is called by isomorphic-fetch.  The "fetch" we
+use in resource comes from isomorphic-fetch.</p>
+<p><strong>The order is important!</strong>  <code>require</code>
+contains a cached map of name to JavaScript module.  When we <code>require('./actions')</code>
+it proceeds to load <code>isomorphic-fetch</code> which then loads
+<code>node-fetch</code>.  If we have not already applied the mock, then the "real"
+module is loaded and we cannot override it.  Instead we apply the mock first
+so that when node-fetch is later called, our mock is supplied instead.</p>
+<p>
+Above we have mocked the resource calls to the dummy server
+and supply a hardcoded result to the client code.  (The client
+code is updateHeadline, which is the code we are testing.)
+</p>
+<p>
+See below for the list of unit tests that we require in this assignment and refer to the <a target="_blank" href="data/api.html#api">API</a> for the return types for each service call.
+Instructions on getting started with the dummy server are at the top of the API page.
+</p>
+
+<h4>Behavior Implementation</h4>
+
+<p>After you have implemented all of the tests listed below, 
+we need to implement the desired functionality so that the tests
+pass.  In this way we also assure that all of the code we write is covered by our test cases.
+I.e., we should get high marks for code coverage with no extra effort and no need to later refactor our
+code so that it will be testable -- this again is a benefit of test driven development.
+The list of functionality is provided below.
+</p>
+
+<p>Once we are completed with the connections to the dummy server
+ we can manually verify that our site works as expected, we will have confidence in this because we already tested and implemented
+the headline and followers functionality, the site should therefore be fully functional in these two areas.  Perform
+live user testing by logging in with your account, changing your headline message, and then logging in with your test user
+account and verify that the headline message is indeed persistent.  
+</p>
+
+<h3>For next time...</h3>
+<p>
+In the next assignment we will implement the missing functionality of editing and commenting
+articles, as well as uploading articles with images, or changing the profile avatar.
+</p>
+
+<h2>Requirements</h2>
+
+<p>Use Chrome as your standard supported browser.  Whereas you can use any browser you like for development, 
+	your assignment will be accessed using Chrome by the grading staff and therefore it behooves you that it works.
+</p>
+<p>Host your submission on Surge.  
+Include the URL in a <code>README.json</code> file as before.  The deployed version of your code on Surge may be used during grading.  
+Therefore after you make your submission, please do not re-deploy to the same Surge domain until the next assignment.</p>
+
+<p>Remember separation of concerns and write DRY modularized code.</p>
+
+<h3>Unit Tests</h3>
+<p>Use Mocha and Karma to test your application.  Note that in principle we only test "our" code and not "framework" code.  Therefore we 
+do not need to test that Redux's <code>dispatch</code> function behaves as advertised, or that ReactDOM properly
+mounts cmponents.  Instead we only want to test our specific business logic that we wrote.</p>
+<p>You should have tests for each of the following, with the "it" descriptions as given</p>
+<ul>
+	 <li>Validate actions (these are functions that dispatch actions)<ul>
+		  <li>resource should be a resource (i.e., mock a request)</li>
+		  <li>resource should give me the http error</li>
+		  <li>resource should be POSTable</li>
+		  <li>should update error message (for displaying error mesage to user)</li>
+		  <li>should update success message (for displaying success message to user)</li>
+		  <li>should navigate (to profile, main, or landing)</li>
+	  </ul></li>
+	  <li>Validate Authentication (involves mocked requests)<ul>
+		  <li>should log in a user</li>
+		  <li>should not log in an invalid user</li>
+		  <li>should log out a user (state should be cleared)</li>
+	 </ul></li>
+	 <li>Validate Article actions<ul>
+		  <li>should fetch articles (mocked request)</li>
+		  <li>should update the search keyword</li>
+	 </ul></li>
+	 <li>ArticlesView (component tests)<ul>
+		  <li>should render articles</li>
+		  <li>should dispatch actions to create a new article</li>
+	 </ul></li>
+	 <li>Validate Profile actions (mocked requests)<ul>
+	      <li>should fetch the user's proile information</li>
+		  <li>should update headline</li>
+	 </ul></li>
+	 <li>Validate reducer (no fetch requests here)<ul>
+		  <li>should initialize state</li>
+		  <li>should state success (for displaying success message to user)</li>
+		  <li>should state error (for displaying error message to user)</li>
+		  <li>should set the articles</li>
+		  <li>should set the search keyword</li>
+	      <li>should filter displayed articles by the search keyword</li>
+	 </ul></li>
+</ul>
+
+<p>Most of the above tests validate the logic code, i.e., your Redux
+code, not your React code.  This implication is supported
+if we have simple React components for our view.  The idea being
+that complex React components would require testing, and testing
+the virtual DOM is more difficult than testing simple functions.
+There are only a couple of component tests listed above, where
+you will want to validate that the component is properly
+rendered and the desired functionality is present.</p>
+
+<h3>Implemented Functionality</h3>
+<p>Below are the functional requirements for this assignment.  
+All of the data mentioned below comes from the dummy server.
+There is <strong>no hardcoded data</strong> in your frontend.
+The currently logged in user's headline, profile picture, collection of articles,
+list of followers, and profile information all come from the dummy server.</p>
+<ul>
+	<li>Landing view: Register a new user, but new users cannot log in</li>
+	<li>Landing view: User can log in with netID and three-word-passphrase, 
+		if successful then redirect to the Main view, otherwise inform user of 
+		incorrect login</li>
+	<li>Main view: ability to update headline for user using dummy server, update is persisted to server</li>
+	<li>Main view: list of articles from server with newest article first</li>
+	<li>Main view: add user to followed users list (add that user's articles to feed)</li>
+	<li>Main view: remove user from followed users list (remove that users's articles from feed)</li>
+	<li>Main view: each article has a list of comments displayed (you may want to show/hide them as in my solution or some other means to make it user friendly)</li>
+	<li>Main view: search bar filters displayed articles by author or body, but not date or article id</li>
+	<li>Main view: ability to add new text-only articles by posting to server</li>
+	<li>Profile view: update on server the user profile email and zipcode after validation</li>
+	<li>Profile view: update on server the user password after validation, note that new password will not persist on server</li>
+</ul>
+<p>The functionality we are not implementing relates to image uploading and editing or commenting on articles,
+	which will be done in the next assignment.
+</p>
+
+<h2>What to submit</h2>
+
+<p>Be sure that you are not submitting or checking in node_modules, look for the .gitignore file
+in your repo, you can copy <a href="https://github.com/skotep/comp431/blob/master/.gitignore"
+target=_blank>this</a> one if you want.
+
+<p>Include your test coverage results in your submission.
+Additionally create a XML junit report that demonstrates your tests ran and did not fail.
+Karma should create the <code>coverage</code> and <code>junit</code> directories for you automatically.
+</p>
+
+<p>Your submission <em>might</em> look like this:</p>
+
+<!-- ******************************** -->
+<pre>
+hw{{vm.hwid}}
+|-- .babelrc
+|-- .eslintrc
+|-- .gitignore
+|-- coverage
+|   |-- html
+|   |   `-- ...
+|   `-- lcov.info
+|--- dist
+|    |-- index.html
+|    `-- images
+|        `-- ...
+|-- junit
+|   `-- TESTS...xml 
+|-- karma.conf.js
+|-- mocha.opts
+|-- package.json
+|-- README.json
+|-- src
+|   |-- actions.js
+|   |-- actions.spec.js
+|   |-- components
+|   |   |-- app.js
+|   |   |-- article
+|   |   |   |-- articleActions.js
+|   |   |   |-- articleActions.spec.js
+|   |   |   |-- article.js
+|   |   |   |-- articlesView.js
+|   |   |   |-- articlesView.spec.js
+|   |   |   |-- comment.js
+|   |   |   `-- newArticle.js
+|   |   |-- auth
+|   |   |   |-- authActions.js
+|   |   |   |-- authActions.spec.js
+|   |   |   |-- landing.js
+|   |   |   |-- login.js
+|   |   |   `-- register.js
+|   |   |-- main
+|   |   |   |-- followingActions.js
+|   |   |   |-- following.js
+|   |   |   |-- headline.js
+|   |   |   |-- main.js
+|   |   |   `-- nav.js
+|   |   `-- profile
+|   |       |-- avatar.js
+|   |       |-- profileActions.js
+|   |       |-- profileActions.spec.js
+|   |       |-- profileForm.js
+|   |       |-- profileForm.spec.js
+|   |       `-- profile.js
+|   |-- index.js
+|   |-- reducers.js
+|   |-- reducers.spec.js
+|   `-- styles.css
+|-- tests.webpack.js
+`-- webpack.config.js
+</pre>
+
+<p>The important thing about the above structure is that each portion of the web app has it's own directory.  
+We try to be modular in our design patterns.  You are not required
+to follow this directory structure exactly, but you are required to have a modular layout.  
+What is important is that there <em>is</em> structure and that the structure makes good extensible and maintainable sense.
+</p>
+
+<p>Here is my example solution site <a target=_blank href="https://ricebook.surge.sh/">https://ricebook.surge.sh</a></p>
+
+</div>
