@@ -1,0 +1,6 @@
+{
+	"name": "decodeapp",
+	"description": "decode App",
+	"repository": "https://github.com/clydeinwebdev/decodeapp-herokurecipe.git",
+	"image": "heroku/nodejs"
+}
