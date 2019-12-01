@@ -241,17 +241,17 @@ this.about_paralax_detail = [{
     "info12":"License Software, Anti-Virus & Firewall (software based)"}];
 
         this.Home_images = [{
-          "photo1":"images/b6.jpg",
-          "photo2":"images/b2.jpg",
+          "photo1":"images/b2.jpg",
+          "photo2":"images/b6.jpg",
           "photo3":"images/b3.jpg",
           "photo4":"images/b4.jpg",
           "photo5":"images/b5.jpg",
-          "desc1":"Providers of network Connectivity",
-          "desc2":"Provides HD CCTV SYSTEM",
+          "desc1":"PC-RESCUE",
+          "desc2":"SAME DAY SERVICE",
           "desc3":"Toubleshoot network sensitivity",
-          "desc4":"Provides cabling structure",
-          "desc5":"Daltans IT Solution",
-          "verse1":"Eclesiastes 12:13",
+          "desc4":"DATA GUARANTEED",
+          "desc5":"NO FIX NO FEE",
+          "verse1":"YOUR ULTIMATE HOME SOLUTION",
           "verse2":"",
           "verse3":"",
           "verse4":"",
@@ -341,9 +341,9 @@ class Component extends app{
       <ul class="right hide-on-med-and-down">
         <li><a href="#Homen" onclick="component.HOme()"><i class="small material-icons right">home</i>HOME</a>
         </li>
-        <li><a href="#About" onclick="component.about()"><i class="small material-icons right orange600 md-18">persons_pin</i>About Daltans</a></li>
+        <li><a href="#About" class="about" onclick="component.about()"><i class="small material-icons right shadow-green md-18">persons_pin</i>About PC-RESCUE</a></li>
         <li><a href="#"><i class="small material-icons right  md-18">business</i>Work</a></li>
-        <li><a href="#" id="location"><i class="small material-icons right shadow-red md-24">my_locations</i>Location</a></li>
+        <li><a href="#" class="location"><i class="small material-icons right shadow-red md-24">my_locations</i>Location</a></li>
         <li><a href="#" id="showNav"><i class="material-icons right">view_module</i>Products</a>
         </li>
         <li><a href="#" onclick="component.minifiedDesign()"><i class="small material-icons left md-18">help</i>Help</a></li>
@@ -456,7 +456,7 @@ class Component extends app{
                     </li>
                     <li>
                       <img src="${r[i].photo2}"> <!-- random image -->
-                      <div class="caption center-align blue-text cta">
+                      <div class="caption center-align white-text cta">
                         <h3>${r[i].desc2}</h3>
                       </div>
                     </li>
@@ -1614,7 +1614,6 @@ class Component extends app{
                 
           }
   }
-
             let component = new Component();
             component.container(); 
 
