@@ -1,4 +1,0 @@
-'AIzaSyACXE1wf2jkbFIjYWfEJ9Re84vBrrgobl8' ==API KEY
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-  type="text/javascript"></script>

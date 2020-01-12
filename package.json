@@ -1,29 +1,32 @@
 {
-  "name": "decodeapp",
-  "version": "1.0.0",
-  "description": "Decode App Boilerplate",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/username/reponame.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/username/reponame/issues"
-  },
-  "homepage": "https://github.com/username/reponame#readme",
-  "dependencies": {
-    "consolidate": "^0.14.4",
-    "express": "^4.14.0",
-    "handlebars": "^4.0.5",
-    "swig": "^1.4.2"
-  },
-  "engines": {
-    "node": "4.4.7"
-  }
+ "name": "yani",
+ "version": "1.0.1",
+ "description": "the trial setup environment",
+ "main": ".server.js",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "repository": {
+  "type": "git",
+  "url": "git+http//gthub.com/Yanians/profile.git"
+ },
+ "keywords": [
+  "trial-environment-adlawan-nov-7-2019"
+ ],
+ "author": "",
+ "licensed": "MIT",
+ "bugs": {
+  "url": ""
+ },
+ "homepage": "https://github.com/profile/#readme",
+ "dependencies": {
+  "consolidate": "^0.14.4",
+  "express": "^4.14.0",
+  "handlebars": "^4.0.5",
+  "nodejs": "0.0.0",
+  "swig": "^1.4.2"
+ },
+ "engines": {
+  "node": "4.4.7"
+ }
 }

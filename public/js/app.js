@@ -1,1620 +1,970 @@
-(function($b){
-        
-             $b('.dropdown-button').dropdown({
-          inDuration: 300,
-          outDuration: 225,
-          constrainWidth: false, // Does not change width of dropdown to that of the activator
-          hover: true, // Activate on hover
-          gutter: 0, // Spacing from edge
-          belowOrigin: false, // Displays dropdown below the button
-          alignment: 'left', // Displays dropdown with edge aligned to the left of button
-          stopPropagation: false // Stops event propagation
-        }); 
-                                               function hide_ipad_keyboard(){
-                                                  document.activeElement.blur();
-                                                   $b('input').blur();
-                                               }     
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./environment/component.js");
+/******/ })
+/************************************************************************/
+/******/ ({
 
-                                               function show_lightbox(){
-                                                    $b('.lightbox_bg').show();
-                                                    $b('.lightbox_container').show();
-                                              }
-                                                                                            
-                                               function hide_lightbox(){
-                                                  $b('.lightbox_bg').hide();
-                                                  $b('.lightbox_container').hide();
-                                                  $b('#HOme').show();
-                                                  $b('#video').show(); 
-                                                  // this.video();
-                                                  // this.Home();
-                                             }
-                                                                                               
-                                              function show_videobox(){
-                                                    $b('.videobox_bg').show();
-                                                    $b('.videobox_container').show();
-                                                   
-                                              }
+/***/ "./environment/Main.js":
+/*!*****************************!*\
+  !*** ./environment/Main.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Main; });
 
-                                              function hide_videobox(){
-                                                  $b('.videobox_bg').hide();
-                                                  $b('.videobox_container').hide();
+class Main{
 
-                                                  $b('.videobox_close').hide();
-                                             }
-                                              function hide_message(){
-                                                  $b('#message').html('').attr('class', '');
-                                                  $b('#message_container').hide();
-                                             }
+    	static renderMain(html, component){
+    		 return component.innerHTML = html;
+    	}
+    	
+    	static renderFooter(html, component){
+          return component.innerHTML += html;
+    	}
 
-                                             function showMessage(message_text,message_type){
-                                                    $b('#message').html('<p>'+ message_text + '<p>').attr('class',message_type);
-                                                    $b('#message_container').show();
-                                                    if(typeof timeout_message !== 'undefined'){
-                                                      window.clearTimeout(timeout_message);
-                                                    }
-                                                      timeout_message = setTimeout(function(){
-                                                        hide_message();
-                                                      },8000);
-                                                  }  
-                                                   
-                                             
-// Action Side
-      $b(document).on('click','#registration',function(e){
-                  e.preventDefault();
-                        show_lightbox();
-                        hide_message();
-              }); 
+       static mainId(){
+        const id = "main";
+       	return document.getElementById(id);
+       }
 
-               $b(document).on('click','.lightbox_close', function(){
-                           hide_lightbox();
-                     });
+       static footerId(){
+        const id = "footer";
+        return document.getElementById(id);
+       }
 
-      $b(document).on('click','#play1',function(e){
-                  e.preventDefault();
-                        show_videobox();
-              }); 
-
-       $b(document).on('click', '.videobox_close', function(){
-                           hide_videobox();
-                     });
-
-       $b(document).on('click', '#close', function(e){
-                e.preventDefault();
-                           hide_videobox();
-                     });
-
-        $b('.carousel.carousel-slider').carousel({full_width: true});
-                  $b(document).ready(function(){
-                  $b('.slider').slider({full_width: true});
-              });
-
-      $b(document).on('click','#showNav',function(e){
-                  e.preventDefault();
-                 $b('.button-collapse').sideNav('show');
-                         $b('.collapsible').collapsible();  
-         });
-
-
-          $b(document).on('click','#download-button',function(){
-                                 // hide_ipad_keyboard();
-                                 // hide_videobox();
-                                var fullname = $b("#full_name").val('');
-                                var religion = $b("#religion").val('');
-                                var country = $b("#country").val('');
-                                var email = $b("#email").val('');
-                                var contact = $b("#contact").val('');
-                                var password = $b("#password").val('');
-                              
-                                   $b.ajax({
-                                          url: 'php/user.php',
-                                         type: "POST",
-                                        async: false,
-                                         data: {
-                                                  "id":1,
-                                                  "full_name": fullname,
-                                                  "religion": religion,
-                                                  "country": country,
-                                                  "email": email,
-                                                  "contact": contact,
-                                                  "password": password
-                                               },
-                                                success:function(data){
-                                                  // $b("#full_name").val('');
-                                                  // $b("#religion").val('');
-                                                  // $b("#country").val('');
-                                                  // $b("#email").val('');
-                                                  // $b("#contact").val('');
-                                                  // $b("#password").val('');
-                                               }
-                             });
-                       });
-               // $b('#insert_user_data #full_name').val('');
-               // $b('#insert_user_data #country').val('');
-               // $b('#insert_user_data #religion').val('');
-               // $b('#insert_user_data #email').val('');
-               // $b('#insert_user_data #contact').val('');
-               // $b('#insert_user_data #password').val('');
-})(jQuery);
-
-
- //                    $b('#insert_user_data').validate({
- //                                          success: 'valid',
- //                                          rules: {
- //                                              full_name: {
- //                                             validators: {
- //                                                notEmpty: {
- //                                                    message: 'The input is required and can\'t be empty'
- //                                                 }
- //                                                }
- //                                              },
- //                                               religion:{
- //                                                 validators: {
- //                                                 notEmpty: {
- //                                                    message: 'The input is required and can\'t be empty'
- //                                                 }
- //                                                }
- //                                              },  
- //                                                country: {
- //                                                   validators: {
- //                                                notEmpty: {
- //                                                    message: 'The input is required and can\'t be empty'
- //                                                  }
- //                                                 }
- //                                                },
- //                                                contact: {
- //                                                   validators: {
- //                                                notEmpty: {
- //                                                    message: 'The input is required and can\'t be empty'
- //                                                 }
- //                                               },
- //                                                  regexp: {
- //                                                    regexp: /^[0-9-0-9_]+$/,
- //                                                    message: 'The input can only consist of number,'
- //                                                }
- //                                            }, 
- //                                                  email: {
- //                                                         validators: {
- //                                                            notEmpty: {
- //                                                                message: 'The email address is required and can\'t be empty'
- //                                                            },
- //                                                              emailAddress: {
- //                                                                  message: 'The input is not a valid email address'
- //                                                              }
- //                                                         }
- //                                                    },
- //                                                password: {
- //                                                   validators: {
- //                                                notEmpty: {
- //                                                    message: 'The password is required and can\'t be empty'
- //                                                }
- //                                             }
- //                                           }
- //                                         },  
- //                                      errorPlacement: function(error, element){
- //                                        error.insertBefore(element);
- //                                      },
- //                                      highlight: function(element){
- //                                        $b(element).parent('.input-field').removeClass('valid').addClass('error');
- //                                      },
- //                                      unhighlight: function(element){
- //                                        $b(element).parent('.input-field').addClass('valid').removeClass('error');
- //                                }
- //                           });
-
-
-    "use stric";
-class app {
-
-  constructor(){
-
-this.about_paralax_detail = [{
-    "id":0,
-    "info_text1":"To be one of the country’s reliable partner in technology and innovative solutions, providing quality service in a sustainable and cost efficient way.",
-    "info_text2":"To provide excellent services to our clients in a timely manner, optimal cost and quality  To establish long term partnership with our suppliers working towards a common goal that is mutually beneficial. To contribute in the development of the society’s infrastructure compliant to required standards, specifications and best engineering practices. To encourage employees by providing opportunities for personal and career growth. To maintain an atmosphere of trust and sustainable partnership with our investors and business partners.",
-    "photo1":"images/homitory.jpg",
-    "photo2":"images/parallax2.jpg",
-    "photo3":"images/parallax1.jpg",
-    "header1":"CCTV/ IP CCTV System: Home or Business Security",
-    "info1":"Supply of Security Cameras and Digital Video Recorder, CCTV System Design, Installation and Service, Rehabilitation or Upgrade of CCTV System, 24/7 Surveillance; Remote or Internet Viewing, Installation of Spy Cameras.",
-    "header2":"Home & Office Alarm & Security Access System",
-    "info2":"System Design, Installation & Service Intruder Alarm Systems: GSM-Automated Single/Multiple Door Access Control Bio-metric, Proximity Card, Pass Code, Gate Automation Proximity Door Lock.",
-    "header3":"Electrical System",
-    "info3":"Electrical System Design & Installation: Residential or Commercial Design & Installation of Industrial Solar Array Systems. AC Systems, Power Backup UPS Systems Supply of Electric Steel Post Supply & System Automation of Electric Prepaid Meter (GSM-Automated)",
-    "header4":"Structured Cabling/ Networking",
-    "info4":"System Design & Installation Data Cabling Data Centers/ Servers Voice Cabling Fiber Optic Cabling Wireless Network Infrastructure Wiring Rehabilitation Upgrade or extension of current network",
-    "header5":"Communication Systems",
-    "info5":"Phone Systems Paging System IP Phones/ IP Conferencing Phones PABX/ IP PABX Implementation, Relocation, Service, Upgrades, Design Build",
-    "header6":"Fire Alarm & ProtectionSystem",
-    "info6":"Property Risk-based Analysis, Consultation Fire Alarm System Design, Installation & Service Supply of Fire Extinguisher and Maintenance Water Sprinkler System Design & Installation Fire Suppression Systems Design & Installation",
-    "header7":"Biometrics",
-    "info7":"Biometric-Fingerprint Attendance Management Device Biometric-Face Recognition Door Access & Attendance Management Biometric Single/Multiple Door Access Control",
-    "header8":"Architectural 3d Rendering/Animation",
-    "info8":"FOR: Residential Housing Scheme, Commercial Complex, Multi-purpose, facility, Hospital,Fitness facility, School, Restaurant or Hotel.",
-    "header9":"Building Management System(BMS)",
-    "info9":"Regulates automatically Building’s Lighting, Security Devices and Fire-Safety Alarms & etc.",
-    "header10":"Sales & Service of IT Equipment",
-    "info10":"Server, Desktops, Laptops, Printers, UPS, NAS, Monitors, and Computer Hardware, Parts & Accessories. Data Center Solutions, Server Racks, Cable Tray, Switches, Modem & Router.",
-    "header11":"Website Design & Development",
-    "info11":"Web Design/ Development Web Hosting Web Revamped/ Redesign E-Commerce Solutions SEO (Search Engine Optimization) Branding/ Logo Design",
-    "header12":"Software Products",
-    "info12":"License Software, Anti-Virus & Firewall (software based)"}];
-
-        this.Home_images = [{
-          "photo1":"images/b2.jpg",
-          "photo2":"images/b6.jpg",
-          "photo3":"images/b3.jpg",
-          "photo4":"images/b4.jpg",
-          "photo5":"images/b5.jpg",
-          "desc1":"PC-RESCUE",
-          "desc2":"SAME DAY SERVICE",
-          "desc3":"Toubleshoot network sensitivity",
-          "desc4":"DATA GUARANTEED",
-          "desc5":"NO FIX NO FEE",
-          "verse1":"YOUR ULTIMATE HOME SOLUTION",
-          "verse2":"",
-          "verse3":"",
-          "verse4":"",
-          "verse5":""
-
-        }];
-
-         this.video_chapter = [{
-          "photo1":"images/b6.jpg",
-          "photo2":"images/b2.jpg",
-          "photo3":"images/b3.jpg",
-          "photo4":"images/b4.jpg",
-          "photo5":"images/b5.jpg",
-          "desc1":"Know Your Destiny",
-          "desc2":"Provides HD CCTV SYSTEM",
-          "desc3":"Toubleshoot network sensitivity",
-          "desc4":"Provides cabling structure",
-          "desc5":"Daltans IT Solution",
-          "verse1":"Eclesiastes 12:13",
-          "verse2":"",
-          "verse3":"",
-          "verse4":"",
-          "verse5":""
-
-        }];
-
-         this.video_link = [{
-         "id":1,
-         "link_video":"video/ph.mov",
-         "desc":"photoshop introduction the whole concept of use to guide you along."
-
-          }];
-
-  }// end of constructor
-  
-     render(html,component){
-        component.innerHTML += html;
-     }
-     reRender(html,component){
-          component.innerHTML = html;
-     }
-
-     accessData(id){
-      let r = this.about_paralax_detail;
-    for(let i=0;i<r.length;i++){
-      if(r[i].id===id){
-        return r[i];
+      static mainNavId(){
+        const id = "mainNav";
+        return document.getElementById(id);
       }
-    }
-     
-     } 
- 
 
-     create(){
-
+       static profileId(){
+        const id = "profile";
+       	return document.getElementById(id);
      }
 
-     update(){
-
+     static companyId(){
+        const id = "company";
+        return document.getElementById(id);
      }
 
-     Delete(){
-
+     static educationId(){
+        const id = "education";
+        return document.getElementById(id);
      }
 
-     search(){
-
+      static experienceId(){
+        const id = "experience";
+        return document.getElementById(id);
      }
 
-     bind(){
-
+     static carouselId(){
+        const id = "carousel";
+        return document.getElementById(id);
      }
 }
 
-class Component extends app{
-        constructor(){
-          super();
-        }
-//small material-icons right  md-18
-
-  container(){
-    let html = `
- <nav>
-    <div class="nav-wrapper blue-grey darken-2 button-content">
-     &nbsp;<a  href="#registration" onclick="component.registration()" id="registration" class="waves-effect waves-light btn green">Register</a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons md-18">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#Homen" onclick="component.HOme()"><i class="small material-icons right">home</i>HOME</a>
-        </li>
-        <li><a href="#About" class="about" onclick="component.about()"><i class="small material-icons right shadow-green md-18">persons_pin</i>About PC-RESCUE</a></li>
-        <li><a href="#"><i class="small material-icons right  md-18">business</i>Work</a></li>
-        <li><a href="#" class="location"><i class="small material-icons right shadow-red md-24">my_locations</i>Location</a></li>
-        <li><a href="#" id="showNav"><i class="material-icons right">view_module</i>Products</a>
-        </li>
-        <li><a href="#" onclick="component.minifiedDesign()"><i class="small material-icons left md-18">help</i>Help</a></li>
-      </ul>
-
-  <ul id="mobile-demo" class="side-nav">
-      <li><div class="userView">
-                  <div class="background">
-                     <img src="images/slidepic.jpg">
-                  </div>
-                <a href="#!user"><img class="circle" src="images/b6.jpg"></a>
-                <a href="#!name"><h5 class="cta"><span class="red-text">Telescuro III @wap</span><h5></a>
-                <a href=""><span class="white-text-email cta">Contact Me!</span></a>
-          </div>
-      </li>
-        <li><a href="#">Registration</a></li>
-        <li><a href="Bootstrap.html">Bootstrap</a></li>
-        <li><a href="">Work</a></li>
-        <li><a href="Navigate.html">Materialize</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Help</a></li>
-      </ul>
-    </div>
-  </nav>
-             <div class="container">
-                 <div class="row">
-                   
-                      <div id="iframe_layout"></div>
-                      <div id="HOme"></div>
-                      <div id="semifooter"></div>
-                      <div id="about"></div>
-                      <div id="registration1"></div>
-                       <div id="minified"></div>
-                  </div>
-                </div>    
-           
-  <footer class="page-footer  blue-grey darken-4">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s6">
-                <h5 class="white-text">ABOUTS US</h5>
-                <p class="grey-text text-lighten-4"><a href=""/>Tour yourself around the world.</p>
-                 <div class="row">
-              <div class="black-text col s3"><a href="#showStarter" onclick="">HOME</div>
-              <div class="col s12"><a href="#showForm" onclick=")">RESERVED YOUR Flight</div>
-              <div class="col s6"><a href="#passView" onclick="">PEOPLE ON YOUR FLIGHT</div>
-            </div>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">FOLLOW</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="">SHARE </a></li>
-                  <li><a class="grey-text text-lighten-3" href="">SHARE</a></li>
-                  <li><a class="grey-text text-lighten-3" href="">SHARE </a></li>
-                  
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer-copyright blue darken-4">
-            <div class="container">
-            <div class="row">© 2016 2017  Web - Developer Design @Adlawan
-             <div class="col 1 offset-2 s1">
-             <img src="" class="none">
-              </div>
-                <div class="col 1 offset-2 s1">
-                     <img src="" class="none">
-                     </div>      
-                        <div class="col 1 offset-1 s1">      
-                           <img src="" class="none">
-                           </div>
-                              <div class="col 1 offset-0 s1">      
-                                <img src="" class="none">
-                                </div>
-                                   <div class="col 1 offset-0 s1">      
-                                     <img src="" class="none">
-                                     </div>
-                    <a class="grey-text text-lighten-4 right" href="">FLIGHT HISTORY AROUND THE WORLD</a>
-                    </div>
-                  </div>
-                </footer></div>
-           </div>
-         </div>
-    `;
-    this.reRender(`${html}`,document.getElementById("app"));  
-    this.HOme();
-    this.semifooter();
-  } // end of function container
-
-     
-     HOme(){
-
-       let html =``;
-        let r = this.Home_images;
-         for(let i=0;i<r.length;i++){
-       html +=`
-             <div class="row">
-             </div>
-          <div class="row">
-              <div class="col s8">
-                              
-                         <div class="slider">
-                  <ul class="slides">
-                    <li>
-                    <img src="${r[i].photo1}"> <!-- random image -->
-                      <div class="caption right-align">
-                        <h1 class="light red-text text-lighten-900 cta">${r[i].desc1}</h1>
-                        <p class=" orange-text text-lighten-900 cta">${r[i].verse1}</p>
-                    </li>
-                    <li>
-                      <img src="${r[i].photo2}"> <!-- random image -->
-                      <div class="caption center-align white-text cta">
-                        <h3>${r[i].desc2}</h3>
-                      </div>
-                    </li>
-                    <li>
-                      <img src="${r[i].photo3}"> <!-- random image -->
-                      <div class="caption right-align">
-                        <h2 class="light grey-text text-lighten-2 cta">${r[i].desc3}</h2>
-                      </div>
-                    </li>
-                     <li>
-                      <img src="${r[i].photo4}"> <!-- random image -->
-                      <div class="caption center-align cta">
-                        <h3>${r[i].desc4}</h3>   
-                      </div>
-                    </li>
-                    <li>
-                      <img src="${r[i].photo5}"> <!-- random image -->
-                      <div class="caption center-align cta">
-                        <h3>${r[i].desc5}</h3>
-                        
-                      </div>
-                    </li>
-                  </ul>
-                </div> 
-
-       </div>
-             
-               <div class="col s4">
-                  <div class="scroll_page"> 
-
-                               <div class="card horizontal">
-                                   <div class="card-image">
-                                      
-                                  </div>
-                              <div class="card-stacked">
-                                  <div class="card-content">
-                                       <p>CS5 Intro. where you can learn much easier in a very compresive topic</p>
-                                   </div>
-                                    <div class="card-action">
-                                      <a href="#" id="play1" onclick="component.iframe_layout()">PLAY</a>
-                                    </div>
-                              </div>
-                          </div>
 
 
-                               <div class="card horizontal">
-                                   <div class="card-image">
-                                      
-                                  </div>
-                              <div class="card-stacked">
-                                  <div class="card-content">
-                                       <p>CS5 Intro. where you can learn much easier in a very compresive topic</p>
-                                   </div>
-                                    <div class="card-action">
-                                      <a href="#" id="play1" onclick="component.iframe_layout()">PLAY</a>
-                                    </div>
-                              </div>
-                          </div>
-           </div>  
-      </div> 
-  </div>     
-      `;
- }
-       this.reRender(`${html}`,document.getElementById("HOme"));
-         this.showHOme();
-     }
+/***/ }),
 
-   iframe_layout(){
-        let html = ``;
-            let r = this.video_link;
-               for(let i = 0; i < r.length; i++) {
-                       html += `
-                         <div class="videobox_close">
-                              <div class="videobox_bg"></div>
-                                 <div class="videobox_container">
-                                        <div class="videobox_content">
-                                             <div class="card horizontal">
-                                                   <div class="card-image">
-                                                       <video class="responsive-video" controls>
-                                                          <source src="${r[i].link_video}" type="video/mp4"> 
-                                                        </video>
-                                                  </div>
+/***/ "./environment/component.js":
+/*!**********************************!*\
+  !*** ./environment/component.js ***!
+  \**********************************/
+/*! exports provided: Component */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-                                                  <div class="card-stacked">
-                                                          <div class="card-content">
-                                                               <p>${r[i].desc}</p>
-                                                          </div>
-                                                          <div class="card-action">
-                                                            <a href="#" id="close">CLOSE</a>
-                                                          </div>
-                                                  </div>
-                                            </div>
-                                        </div>      
-                                 </div>   
-                         </div>                                
-                      `;
-               }             
-                       this.reRender(`${html}`,document.getElementById("iframe_layout"));
-                       this.showIframe();   
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return Component; });
+/* harmony import */ var _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../environment/dataContent.js */ "./environment/dataContent.js");
+/* harmony import */ var _environment_htmlContent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../environment/htmlContent.js */ "./environment/htmlContent.js");
+/* harmony import */ var _environment_Main_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environment/Main.js */ "./environment/Main.js");
+/* harmony import */ var _environment_invoker_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environment/invoker.js */ "./environment/invoker.js");
 
-                 }
 
-  /*           </br>
-  <div class="parallax-container valign-wrapper"> 
-    <div class="container-fixed">  
-            <div class="row">
-              <div class="col s6">
-                  <a href="#" id="download-button" class="waves-effect btn-large hoverable purple accent-8">Vision</a>
-                  <h5 class="thin-text left-align white-text valign canter">${r[i].info_text1}</h5>
-                    </div>
-                    <div class="col s6">
-                    <a href="#" id="download-button" class="waves-effect btn-large hoverable purple accent-8">Mission</a>
-                     <h5 class="thin-text left-align white-text valign canter">${r[i].info_text2}</h5>
-                       </div>
-                   <div class="col 16 s12 m12 l6">
-                  <h5 class="thin-text left-align white-text valign">${r[i].info_text2}</h5>
-                   </div>
-            </div> 
-    </div>
-       <div class="parallax"><img src="${r[i].photo2}"></div> 
-  </div>   
-      */
 
-        about(){
-    let html = ``;      
-    let r = this.about_paralax_detail;
-    for(let i=0;i<r.length;i++){
-         html += `
- 
-     <div class="container-fixed">  
-       <div class="row">
-        <ul class="thin-text">
-            <li>
-              <div class="col s6"><a href="#" id="download-button" class="waves-effect btn-large hoverable purple accent-8">Vision</a></div>
-              <div class="col s6"><h5 class="thin-text l white-text valign center">${r[i].info_text1}</h5></div>
-            </li>
-            <li>
-              <div class="col s6"><a href="#" id="download-button" class="waves-effect btn-large hoverable purple accent-8">Mission</a></div>
-              <div class="col s6"><h5 class="thin-text l white-text valign center">${r[i].info_text2}</h5></div>
-            </li>
-        </ul>
-       </div>
-     </div>
 
-   <div class="container-fixed" id="services">
-           <div class="row">
-             <h2 class="blue-text center section-header ctad">Services</h2>
-               </div>
 
-             <div class="row">
 
-                     <div class="col 12 s12 m6 l4">
-                                   <div class="card black accent-4 z-deep-2 fixThis">
-                                      <span class="card-title blue-text">${r[i].header1}</span>
-                                         <div class="divider"></div>
-                                            <div class="card-content white-text">
-                                                <p>${r[i].info1}</p>
-                                            </div>
-                                            <div class="card-action">
+class Component extends _environment_Main_js__WEBPACK_IMPORTED_MODULE_2__["default"] {              
 
-                                               <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-
-                                   </div>
-                           </div>
-
-                      <div class="col 12 s12 m6 l4">
-                               <div class="card black accent-4 z-deep-2 fixThis">
-                                   <span class="card-title blue-text">${r[i].header2}</span>
-                                        <div class="divider"></div>
-                                            <div class="card-content white-text">
-                                               <p>${r[i].info2}</p>
-                                            </div>
-                                            <div class="card-action">
-                                              <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-
-                                         
-                               </div>
-                      </div>
-
-                     <div class="col 12 s12 m6 l4">
-                                   <div class="card black accent-4 z-deep-2 fixThis">
-                                      <span class="card-title blue-text">${r[i].header3}</span>
-                                         <div class="divider"></div>
-                                            <div class="card-content white-text">
-                                                <p>${r[i].info3}</p>
-                                            </div>
-                                            <div class="card-action">
-                                            <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-                              </div>
-                     </div>
-             </div><!--end of row-->
-
-                    <div class="row">
-
-                            <div class="col 12 s12 m6 l4">
-                                 <div class="card black accent-4 z-deep-2 fixThis">
-                                      <span class="card-title blue-text">${r[i].header4}</span>
-                                           <div class="divider"></div>
-                                              <div class="card-content white-text">
-                                                 <p>${r[i].info4}</p>
-                                              </div>
-                                            <div class="card-action">
-                                              <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-
-                                 </div>
-                            </div>
-                    
-
-                           <div class="col 12 s12 m6 l4">
-                                   <div class="card black accent-4 z-deep-2 fixThis">
-                                       <span class="card-title blue-text">${r[i].header5}</span>
-                                         <div class="divider"></div>
-                                          <div class="card-content white-text">
-                                            <p>${r[i].info5}</p>
-                                          </div>
-                                            <div class="card-action">
-                                              <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-
-                                   </div>
-                           </div>
-              
-
-                           <div class="col 12 s12 m6 l4">
-                                <div class="card black accent-4 z-deep-2 fixThis">
-                                       <span class="card-title blue-text">${r[i].header6}</span>
-                                       <div class="divider"></div>
-                                          <div class="card-content white-text">
-                                       <p>${r[i].info6}</p>
-                                          </div>
-                                        <div class="card-action">
-                                          <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-                                  </div>
-                          </div>
-                    </div><!--end of row-->
-
-                <div class="row">
-                     <div class="col 12 s12 m6 l4">
-                           <div class="card black accent-4 z-deep-2 fixThis">
-                               <span class="card-title blue-text">${r[i].header7}</span>
-                                   <div class="divider"></div>
-                                      <div class="card-content white-text">
-                                         <p>${r[i].info7}</p>
-                                      </div>
-                                    <div class="card-action">
-                                      <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
- 
-                           </div>
-                     </div>
-
-                     <div class="col 12 s12 m6 l4">
-                           <div class="card black accent-4 z-deep-2 fixThis">
-                               <span class="card-title blue-text">${r[i].header8}</span>
-                                   <div class="divider"></div>
-                                      <div class="card-content white-text">
-                                         <p>${r[i].info8}</p>
-                                      </div>
-                                    <div class="card-action">
-                                     <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-  
-                           </div>
-                     </div>
-
-                  <div class="col 12 s12 m6 l4">
-                          <div class="card black accent-4 z-deep-2 fixThis">
-                               <span class="card-title blue-text">${r[i].header9}</span>
-                                 <div class="divider"></div>
-                                    <div class="card-content white-text">
-                                      <p>${r[i].info9}</p>
-                                    </div>
-                                  <div class="card-action">
-                                    <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-                              </div>
-                   </div>
-              </div><!--end of row-->  
-                 
-                 <div class="row">
-                         <div class="col 12 s12 m6 l4">
-                               <div class="card black accent-4 z-deep-2 fixThis">
-                                     <span class="card-title blue-text">${r[i].header10}</span>
-                                     <div class="divider"></div> 
-                                        <div class="card-content white-text">
-                                     <p>${r[i].info10}</p>
-                                        </div>
-                                      <div class="card-action">
-                                         <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-  
-                               </div>
-                        </div>
-
-                        <div class="col 12 s12 m6 l4">
-                                 <div class="card black accent-4 z-deep-2 fixThis">
-                                     <span class="card-title blue-text">${r[i].header11}</span>
-                                     <div class="divider"></div>
-                                        <div class="card-content white-text">
-                                     <p>${r[i].info11}</p>
-                                        </div>
-                                      <div class="card-action">
-                                         <a href="#modal3">Find out more</a>
-
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
-
-                                 </div>
+ landingPage(){ 
+  _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_0__["default"].dataArray();
+        let html = ` <!-- this is the play area -->
+              &nbsp; 
+                    <div style="margin-left:2%;margin-right:2%" class="row border-effectDiv">
+                         <div class="col s12 m4 l4 border-effectDiv">
+                       
+                                <ul>
+                                  <li class="center">
+                                     <div id="mainNav"></div>
+                                  </li>
+                                     <li class="center">
+                                         <div class="fixed-action-left-btn">
+                                                <a class="btn-floating btn-small red">
+                                                  <i class="material-icons pulse">menu</i>
+                                                </a>
+                                                <ul>   
+                                                  <li><a href="#" id="showEd"   class="btn-floating btn-small green pulse"><i class="material-icons">account_balance</i></a></li>
+                                                  <li><a href="#" id="showComp" class="btn-floating btn-small yellow darken-1 pulse"><i class="material-icons">style</i></a></li>
+                                                  <li><a href="#" id="showProf" class="btn-floating btn-small red pulse"><i class="material-icons ">fingerprint</i></a></li>
+                                                  <li><a href="#" id="showEx" class="btn-floating btn-small blue pulse"><i class="material-icons pulse">compare</i></a></li>
+                                                </ul>
+                                         </div>
+                                       </li>
+                                </ul> 
                          </div>
 
-                          <div class="col 12 s12 m6 l4">
-                                  <div class="card black accent-4 z-deep-2 fixThis">
-                                         <span class="card-title blue-text">${r[i].header12}</span>
-                                         <div class="divider"></div>
-                                            <div class="card-content white-text">
-                                         <p>${r[i].info12}</p>
-                                            </div>
-                                          <div class="card-action">
-                                            <a href="#modal3">Find out more</a>
+                           <div class="col s12 m8 l8 border-effectDiv">
+                              <div id="profile"></div>
+                              <div id="education"></div>
+                              <div id="company"></div>
+                              <div id="experience"></div>
+                              <div id="carousel"></div>
+                           </div>   
+                    </div>`;
 
-                                                  <div id="modal3" class="modal bottom-sheet">
-                                                    <div class="modal-content">
-                                                      <h4>Modal Header</h4>
-                                                            <ul class="collection">
-                                                            <li class="collection-item avatar">
-                                                            <p>Daltans IT Solution is an authorized distributor of HIKVISION Products</>
-                                                            </li>
-                                                              <li class="collection-item avatar">
-                                                                <img src="images/yuna.jpg" alt="" class="circle">
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle">folder</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle green">assessment</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                              <li class="collection-item avatar">
-                                                                <i class="material-icons circle red">play_arrow</i>
-                                                                <span class="title">Title</span>
-                                                                <p>First Line <br>
-                                                                   Second Line
-                                                                </p>
-                                                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                                              </li>
-                                                           </ul>
-                                                    </div>
-                                                </div>  
-                                           </div>
+    let htmlFooter = `<div class="row">
+                        <div class="col s12 m4 l4"></div>
+                          <div class="col s12 m8 l8">     
+                    <footer>
+                        <ul class="center pagination-footer">
+                          <li class="active waves-effect red"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                          <li class="active waves-effect red"><a href="#!">1</a></li>
+                          <li class="active waves-effect red"><a href="#!">2</a></li>
+                          <li class="active waves-effect red"><a href="#!">3</a></li>
+                          <li class="active waves-effect red"><a href="#!">4</a></li>
+                          <li class="active waves-effect red"><a href="#!">5</a></li>
+                          <li class="active waves-effect red"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                      </ul>
+                    </footer>
+                   </div>
+                 </div>   
+                    `;
+        _environment_Main_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderMain(`${html}`,_environment_Main_js__WEBPACK_IMPORTED_MODULE_2__["default"].mainId());
+        _environment_Main_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderFooter(`${htmlFooter}`,_environment_Main_js__WEBPACK_IMPORTED_MODULE_2__["default"].footerId());
+       component.mainNavigation();
+       _environment_htmlContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].profile();
+        document.getElementById('showComp').addEventListener('click', function(){
+                                  _environment_htmlContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].company();
+                                  _environment_invoker_js__WEBPACK_IMPORTED_MODULE_3__["default"].showCompany();
+                         });
+        document.getElementById('showProf').addEventListener('click', function(){
+                                  _environment_htmlContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].profile();
+                                  _environment_invoker_js__WEBPACK_IMPORTED_MODULE_3__["default"].showProfile();
+                         });
+        document.getElementById('showEd').addEventListener('click', function(){
+                                  _environment_htmlContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].education();
+                                  _environment_invoker_js__WEBPACK_IMPORTED_MODULE_3__["default"].showEducation();
+                         });
+        document.getElementById('showEx').addEventListener('click', function(){
+                                  _environment_htmlContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].experience();
+                                  _environment_invoker_js__WEBPACK_IMPORTED_MODULE_3__["default"].showExperience();
+               });
+}
 
-                          </div>
-                 </div><!--end of row-->
-        </div><!--end of container-->   
-           
-                 <div class="parallax-container valign-wrapper">
-                    <div class="container">
-                      <div class="row center">
-                         <div class="col l10 offset-11 valign">
-                             <h2 class="center-align white-text cta">interested in Working Together</h2>
-                              <a href="#" class="center waves-effect btn-large hoverable purple accent-8">Get in touch</a>
-                         </div>        
-                      </div>
-                    </div>
-                       <!--<div class="parallax"><img src="${r[i].photo1}"></div> -->
-                 </div> 
+  mainNavigation(){
+                         let html = `
+                                      <ul>
+                                       <li class="center">
+                                        `; 
+                                               let r = _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_0__["default"].profileData;
+
+                                               let count = 0;
+
+                                                         for(var i = (r.length-1);i>=0;i--){
+                                                              if(count++ === r[i].proImage)
+                                                                break;     
+                                                     html +=`
+                                                      <img class="resize-image" src="${r[i].proImage.image}"/>
+                                                      </li>`;
+        }
+             _environment_Main_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderMain(`${html}`,document.getElementById('mainNav'));
+             _environment_invoker_js__WEBPACK_IMPORTED_MODULE_3__["default"].showMainNav();
+             _environment_invoker_js__WEBPACK_IMPORTED_MODULE_3__["default"].showProfile();
+}     
+   
+ } /* END OF CLASS COMPONENT */
+
+let component = new Component();
+component.landingPage();
 
 
-                <div class="container-fixed">
-                        <div class="row">
-                        
-                      <div class="col 12 offset-4 s12 m6 l4">
-                         <h3 class="center section-header">Selected Work</h3> 
-                            <div class="card">
-                              <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="images/">
-                                    </div>
-                                      <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Brytup@gmail.com<i class="material-icons right">more_vert</i></span>
-                                        <p><a href="#">follow</a>
-                                       </div>
-                                     <div class="card-reveal">
-                                       <span class="card-title grey-text text-darken-4">Brytup@gmail.com<i class="material-icons right">close</i></span>
-                                       <p>You need a website, why bothering yourself, just login to our stunnig page and make it your own.</p>
-                                       </div>
-                                  </div>
-                          </div>
 
-                             <div class="col 12 offset-4 s12 m6 l4">
-                         <h3 class="center section-header">Stunnig Page</h3> 
-                            <div class="card">
-                              <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="images/">
-                                    </div>
-                                      <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Brytup@gmail.com<i class="material-icons right">more_vert</i></span>
-                                        <p><a href="#">follow</a>
-                                       </div>
-                                     <div class="card-reveal">
-                                       <span class="card-title grey-text text-darken-4">Brytup@gmail.com<i class="material-icons right">close</i></span>
-                                       <p>You need a website, why bothering yourself, just login to our stunnig page and make it your own.</p>
-                                       </div>
-                                  </div>
-                          </div>
+/***/ }),
 
-                              <div class="col 12 offset-8 s12 m6 l4">
-                         <h3 class="center section-header">Try yourself</h3> 
-                            <div class="card">
-                              <div class="card-image waves-effect waves-block waves-light">
-                               <img class="activator" src="images/">
-                                   </div>
-                                      <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">###<i class="material-icons right">more_vert</i></span>
-                                        <p><a href="#">follow</a>
-                                       </div>
-                                     <div class="card-reveal">
-                                       <span class="card-title grey-text text-darken-4">###<i class="material-icons right">close</i></span>
-                                       <p>You need a website, why bothering yourself, just login to our stunnig page and make it your own.</p>
-                                       </div>
-                                  </div>
-                            </div>  
+/***/ "./environment/dataContent.js":
+/*!************************************!*\
+  !*** ./environment/dataContent.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-                  </div>
-           </div>
-          `;
-      }
-          $b(document).ready(function(){
-          // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-          $b('.modal').modal();
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return dataContent; });
+
+class dataContent{
+
+      static dataArray(){
+
+           this.profileData = [{
+                 proImage:{
+                  image:'./image/adlawan.jpg'
+                 },
+
+                 bio:{ full_name:'Brian C. Adlawan',
+                      status:'Single',
+                         age:'30',
+                     present_address:'P#12 Saint John Bucana Davao City',
+                     contact:'09979162314',
+                       email:'yan19891989000@gmail.com',
+                  year_birth:'April 17,1989',
+                      height:'55 lbs',
+          provincial_Address:'Forest Drive Gate 2 Block 4 lot 6 Bislig, Sur Del Sur',
+              place_of_birth:'Caguyao Bislig Sur Del Sur'
+            },
+                       
+                       education:{
+                              elementary:{
+                          schlName:'San Vicente Elementary School',
+                       schlAddress:'San Vicente 1, Bislig Sur Del Sur',
+                       yrGraduated:'2004-2005' },
+
+                              highSchool:{
+                                schlName:'Alegria Nat High School',
+                              schlAddress:'Alegria Sur Del Norte',
+                              yrGraduated:'2007-2008'
+                              },
+
+                              vocational:{
+                                 schlAddress:'Matina, road maa davao city',
+                                    schlName:'Ama Computer Learning Center',
+                                      course:'Advance Programming / Design & Networking',
+                                 yrGraduated:'2008-2009'
+                              },
+
+                              college:{
+                                 schlName:'AMA Computer College Davao Campus',
+                                 schlAddress:'123 Gen Malvar st., Davao City',
+                                 yrGraduated:'2018-2019',
+                                 course:'Bachelor of Science in Information Technology'
+                              } 
+                           },     
+
+                           company:{
+                                 esscor:{
+                                   name:'Electronic Security Systems Corporation',
+                                address:'Suite 307 Legaspi Towers 200, Paseo De Roxas St., Legaspi Village makati city, Philippines',
+                               position:'systems engineer',
+                                   year:'Sept 14, 2018 to July 30 2019'
+                            },
+
+                                 daltans:{
+                                    name:'Daltan\'s IT Solution',
+                                 address:'kilometer 5, anito bldg door #6 Buhangin Davao City',
+                                position:'it field technician',
+                                    year:'June 2013 to March 2014'
+                            },
+                      },
+                            experience:{
+                                     one:'Accurately estimate the time, effort & resources needed to effect system upgrades.',
+                                     two:'Carrying out standard, complex and integrated software modification and upgrades,',
+                                   three:'Generating and reviewing systems downtime reports that give an accurate picture.',
+                                    four:'Providing complex pre-sale technical support to the companys Marketing department.',
+                                    five:'Installation of security systems including but not limited to access control, CCTV surveillance, alarms, fire suppression systems and its associated work.',
+                                     six:'Providing support to other departments need Furnish request of necessary materials for project.',
+                                   seven:'Coordinating the activity of different teams and engineering staff.',
+                                   eight:'Creating a business case / topology diagram to purchase companys services.',
+                                    nine:'Involved in the resolution of system, hardware, software & infrastructure problems.',
+                                     ten:'Providing network systems engineering support for different IT projects',
+                                  eleven:'Attending face to face meetings with clients to discuss their exact requirements',
+                                  twelve:'Ensuring that services are delivered in accordance with established objectives',
+                                thirteen:'Perform project on-site system configuration and programming',
+                                fourteen:'Perform testing, commissioning, and project closure.',
+                                 fifteen:'Perform training and turn-over of onsite projects.'
+                          },
+                         
+                               carouselIMG:{
+                                    imgProf1:{
+                                             image:'./image/b1.jpg',
+                                              info:'this is the info from imgProf1',
+                                       description:'this is the description from imgProf1',
+                                           history:'this is the history from the imgProf1'
+                                    },
+                                    
+                                    imgProf2:{
+                                            image:'./image/b2.jpg',
+                                             info:'this is the info from imgProf2',
+                                      description:'this is the description from imgProf2',
+                                          history:'this the history from imgProf2'      
+                                    },
+                                
+                                    imgProf3:{
+                                      image:'./image/b3.jpg',
+                                      info:'this is the info from imgProf3',
+                                      description:'this is the description from imgProf3',
+                                      history:'this is the history from imgProf3'
+                                    },
+                              
+                                    imgProf4:{
+                                      image:'./image/b4.jpg',
+                                      info:'this is the info from imgProf4',
+                                      description:'this is the description from imgProf4',
+                                      history:'this is the history from imgProf4'
+                                    },
+                                 
+                                    imgProf5:{
+                                      image:'./image/b5.jpg',
+                                      info:'this is the info from imgProf5',
+                                      description:'this is the description from imgProf5',
+                                      history:'this is the history from imgProf5'
+                                    },
+                                
+                                    imgProf6:{
+                                      image:'./image/b6.jpg',
+                                      info:'this is the info from imgProf6',
+                                      description:'this is the history from imgProf6',
+                                      history:'this is the history from imgProf6'      
+                                    },
+                               
+                                    imgProf7:{
+                                      image:'./image/b7.jpg',
+                                      info:'this is the history from imgProf7',
+                                      description:'this is the description from imgProf7',
+                                      history:'this is the history from imgProf7'
+                                    },
+                               
+                                    imgProf8:{
+                                      image:'./image/b8.jpg',
+                                      info:'this is the info from imgProf8',
+                                      description:'this is the description from imgProf8',
+                                      history:'this is the history from imgProf8'      
+                                    },
+                            
+                                    imgProf9:{
+                                      image:'./image/b9.jpg',
+                                      info:'this is the info from imgProf9',
+                                      description:'this is the description from igmProf9',
+                                      history:'this is the history from imgProf9'      
+                                    },
+                
+                                    imgProf10:{
+                                      image:'./image/b10.jpg',
+                                      info:'this is the info from imgProf10',
+                                      description:'this is the description from imgProf10',
+                                      history:'this is the history from imgProf10'      
+                                    },
+                              
+                                    imgProf11:{
+                                      image:'./image/b11.jpg',
+                                      info:'this is the info from imgProf11',
+                                      description:'this is the description from imgProf11',
+                                      history:'this is the history from imgProf11'      
+                                    }
+                                 }
+                      }];
+
+       return this;
+      }     
+
+   }
+
+
+
+
+/***/ }),
+
+/***/ "./environment/htmlContent.js":
+/*!************************************!*\
+  !*** ./environment/htmlContent.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return htmlContent; });
+/* harmony import */ var _environment_Main_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../environment/Main.js */ "./environment/Main.js");
+/* harmony import */ var _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../environment/dataContent.js */ "./environment/dataContent.js");
+/* harmony import */ var _environment_invoker_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environment/invoker.js */ "./environment/invoker.js");
+/* harmony import */ var _environment_component_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environment/component.js */ "./environment/component.js");
+
+
+
+
+
+class htmlContent extends _environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"]{
+
+ static profile(){
+
+                     var r = _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].profileData;
+                     let count = 0;
+                     let htmlform = ``;
+                        for(let i = (r.length-1);i>=0;i--){
+
+                         if(count++ === r[i].bio)
+
+                      break;
+                         
+         htmlform += ` <h3 class="white-text text-h3">PROFILE</h3>
+                  <ul class="center white lighten-5 border-effectDiv hoverable">
+                     
+                               <li class="row border-effectDiv">
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Name</h5>${r[i].bio.full_name}</div>
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Age</h5>${r[i].bio.age}</div>
+                              </li>
+                         
+                             <li class="row border-effectDiv">
+                               <div class="title col s12 m6 l6 text-modify"><h5>Status</h5>${r[i].bio.status}</div>
+                               <div class="title col s12 m6 l6 text-modify"><h5>Height</h5>${r[i].bio.height}</div>
+                             </li>  
+
+                             <li class="row border-effectDiv">
+                               <div class="title col s12 m6 l6 text-modify"><h5>Contact</h5>${r[i].bio.contact}</div>
+                               <div class="title col s12 m6 l6 text-modify"><h5>Birt</h5>${r[i].bio.year_birth}</div>
+                             </li>  
+
+                              <li class="row border-effectDiv">
+                               <div class="title col s12 m12 l6 text-modify"><h5>Address</h5>${r[i].bio.present_address}</div>
+                               <div class="title col s12 m12 l6 text-modify"><h5>Email</h5>${r[i].bio.email}</div>
+                              </li>
+
+                           <li class="row border-effectDiv"> 
+                               <div class="title col s12 s6 m12 l6 text-modify"><h5>Place of Birth</h5>${r[i].bio.place_of_birth}</div>
+                               <div class="title col s12 vs6 m12 l6 text-modify"><h5>Provincial</h5>${r[i].bio.provincial_Address}</div>
+                          </li>
+                        </ul>
+                      `;
+                     }
+                       _environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].renderMain(`${htmlform}`,_environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].profileId());
+     }
+
+static education(){
+     var r = _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].profileData;
+     let count = 0;
+     let html = ``;
+    for(let i = (r.length-1);i>=0;i--){
+
+         if(count++ === r[i].education)
+
+          break;
+                         
+         html += ` 
+                       <h3 class="white-text text-h3">EDUCATION</h3>
+                  <ul class="center white lighten-5 border-effectDiv hoverable">
+                            <li class="row border-effectDiv">
+                               <h4 class="white-text text-h34">College</h4>
+                                 <div class="title col s12 m6 l6"><h5>School</h5>${r[i].education.college.schlName}</div>
+                                 <div class="title col s12 m6 l6"><h5>Address</h5>${r[i].education.college.schlAddress}</div>
+                                 <div class="title col s12 m6 l6"><h5>Graduated</h5>${r[i].education.college.yrGraduated}</div>
+                                 <div class="title col s12 m6 l6"><h5>Course</h5>${r[i].education.college.course}</div>
+                              </li>
+
+                              <li class="row border-effectDiv">
+                               <h4 class="white-text text-h34">Vocational</h4>
+                                 <div class="title col s12 m6 l6"><h5>School</h5>${r[i].education.vocational.schlName}</div>
+                                 <div class="title col s12 m6 l6"><h5>Address</h5>${r[i].education.vocational.schlAddress}</div>
+                                 <div class="title col s12 m6 l6"><h5>Graduated</h5>${r[i].education.vocational.yrGraduated}</div>
+                                 <div class="title col s12 m6 l6"><h5>Course</h5>${r[i].education.vocational.course}</div>
+                              </li>
+                         
+                              <li class="row border-effectDiv">
+                               <h4 class="white-text text-h34">High School</h4>
+                                 <div class="title col s12 m6 l6"><h5>School</h5>${r[i].education.highSchool.schlName}</div>
+                                 <div class="title col s12 m6 l6"><h5>Address</h5>${r[i].education.highSchool.schlAddress}</div>
+                                 <div class="title col s12 m6 l6"><h5>Graduated</h5>${r[i].education.highSchool.yrGraduated}</div>
+                              </li>
+
+                              <li class="row border-effectDiv">
+                               <h4 class="white-text text-h34">Elementary</h4>
+                                 <div class="title col s12 m6 l6"><h5>School</h5>${r[i].education.elementary.schlName}</div>
+                                 <div class="title col s12 m6 l6"><h5>Address</h5>${r[i].education.elementary.schlAddress}</div>
+                                 <div class="title col s12 m6 l6"><h5>Graduated</h5>${r[i].education.elementary.yrGraduated}</div>
+                              </li>
+                        </ul>
+                      
+                      `;
+                 }
+                         
+          _environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].renderMain(`${html}`,_environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].educationId());
+     }     
+
+static company(){
+     var r = _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].profileData;
+     let count = 0;
+     let html = ``;
+    for(let i = (r.length-1);i>=0;i--){
+
+         if(count++ === r[i].company.esscor)
+
+          break;
+                         
+        html += ` 
+                       <h3 class="white-text text-h3">COMPANY</h3>
+                  <ul class="center white lighten-5 border-effectDiv hoverable">
+                    
+                            <li class="row border-effectDiv">
+                               <h4 class="white-text text-h34">ESSCOR</h4>
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Name</h5>${r[i].company.esscor.name}</div>
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Address</h5>${r[i].company.esscor.address}</div>
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Position</h5>${r[i].company.esscor.position}</div>
+                                  <div class="title col s12 m6 l6 text-modify"><h5>Year</h5>${r[i].company.esscor.year}</div>
+                              </li>
+                         
+                               <li class="row border-effectDiv">
+                               <h4 class="white-text text-h34">DALTANS</h4>
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Name</h5>${r[i].company.daltans.name}</div>
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Address</h5>${r[i].company.daltans.address}</div>
+                                 <div class="title col s12 m6 l6 text-modify"><h5>Position</h5>${r[i].company.daltans.position}</div>
+                                  <div class="title col s12 m6 l6 text-modify"><h5>Year</h5>${r[i].company.daltans.year}</div>
+                              </li>
+                        </ul>
+                      
+                      `;
+                 }
+                          
+          _environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].renderMain(`${html}`,_environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].companyId());
+     }
+
+static experience(){
+     var r = _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].profileData;
+     let count = 0;
+     let html = ``;
+    for(let i = (r.length-1);i>=0;i--){
+
+         if(count++ === r[i].experience)
+
+          break;
+                         
+        html += ` 
+                       
+               <h3 class="white-text text-h3">EXPERIENCE</h3>
+                  <ul class="collection">
+                            <li class="collection-item avatar">
+                               <div class="row border-effectDiv">
+                                     <div class="col s6 m8 l8">
+                                     <h4 class="white-text text-h3 center">Line of Duties</h4>
+                                     </div>
+
+                                     <div class="col s6 m4 l4">&nbsp;
+                                          <button id="flow-toggle" style="margin-right:2%" class="btn waves-effect waves-light z-depth-5" name="action">PROOF
+                                                 <i class="material-icons right">send</i>
+                                          </button>
+                                     </div>
+                                 </div>
+                            </li>
+                              
+                               <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.one}</span>
+                               </li>
+                      
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.two}</span>
+                               </li>
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.three}</span>
+                               </li>
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.four}</span>
+                               </li>
+
+                               
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.five}</span>
+                               </li>
+                                
+                               <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.six}</span>
+                               </li>
+                      
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.seven}</span>
+                               </li>
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.eight}</span>
+                               </li>
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.nine}</span>
+                               </li>
+
+                               
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.ten}</span>
+                               </li>
+                               
+                               <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.eleven}</span>
+                               </li>
+                      
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.twelve}</span>
+                               </li>
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.thirteen}</span>
+                               </li>
+
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.fourteen}</span>
+                               </li>
+
+                               
+                              <li class="collection-item avatar">
+                                   <i class="material-icons">navigate_next</i>
+                                   <span class="title">${r[i].experience.fifteen}</span>
+                               </li>
+                        </ul>
+                      
+                      `;
+                 }
+                                   
+          _environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].renderMain(`${html}`,_environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].experienceId());
+           document.getElementById('flow-toggle').addEventListener('click', function(){
+                                  htmlContent.carousel();
+                                  _environment_invoker_js__WEBPACK_IMPORTED_MODULE_2__["default"].showCarousel();
+                 
+               });
+     }
+
+static carousel(){
+	_environment_dataContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].dataArray();
+	let count = 0;
+	let r = _environment_dataContent_js__WEBPACK_IMPORTED_MODULE_1__["default"].profileData;
+    let html = `<div class="carousel center"><span id="gobackToExperience" class="new badge red"><i class="material-icons">arrow_forward</i></span>`;
+	                 
+	                 for(var i = (r.length-1); i>=0;i--){
+                            if(count++ === r[i].carouselIMG)
+                            	break        ;
+                html+=`
+					    <a id="img1" class="carousel-item" href="#one!"><img class=""id="mod-img" src="${r[i].carouselIMG.imgProf1.image}"></a>
+					    <a class="carousel-item" href="#two!"><img id="mod-img" src="${r[i].carouselIMG.imgProf2.image}"></a>
+					    <a class="carousel-item" href="#three!"><img id="mod-img" src="${r[i].carouselIMG.imgProf3.image}"></a>
+					    <a class="carousel-item" href="#four!"><img id="mod-img" src="${r[i].carouselIMG.imgProf4.image}"></a>
+					    <a class="carousel-item" href="#five!"><img id="mod-img" src="${r[i].carouselIMG.imgProf5.image}"></a>
+					    <a class="carousel-item" href="#six!"><img id="mod-img" src="${r[i].carouselIMG.imgProf6.image}"></a>
+					    <a class="carousel-item" href="#seven!"><img id="mod-img" src="${r[i].carouselIMG.imgProf7.image}"></a>
+					    <a class="carousel-item" href="#eight!"><img id="mod-img" src="${r[i].carouselIMG.imgProf8.image}"></a>
+					    <a class="carousel-item" href="#nine!"><img id="mod-img" src="${r[i].carouselIMG.imgProf9.image}"></a>
+					    <a class="carousel-item" href="#ten!"><img id="mod-img" src="${r[i].carouselIMG.imgProf10.image}"></a>
+					    <a class="carousel-item" href="#eleven!"><img id="mod-img" src="${r[i].carouselIMG.imgProf11.image}"></a>
+                     `;   
+	}
+		html+=`</div>`;
+		              for(var i = (r.length-1); i>=0;i--){
+                            if(count++ === r[i].carouselIMG)
+                            	break;
+		             
+		html+=`
+		    <div id="img1show"><img id="imgScale" class="materialboxed" src="${r[i].carouselIMG.imgProf1.image}"></div>
+		    `;
+	}
+	                $b(document).ready(function(){
+	                	 $b('#img1show').hide();
+	                	 $b('#img1').click(function(){
+	                	 	 $b('#img1show').show();
+	                	 	 $b('#img1show').click(function(){
+	                	 	 		 $b('#img1show').hide();
+	                	 	 	})
+	                	 	 })
+	                	 })
+		html+=`<div style="margin-left:40%" class="preloader-wrapper medium active">
+
+				      <div class="spinner-layer spinner-red">
+
+					        <div class="circle-clipper left">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class="gap-patch">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class=" circle-clipper right">
+					          <div class="circle"></div>
+					        </div>
+
+				      </div>
+
+				       <div class="spinner-layer spinner-blue">
+
+					        <div class="circle-clipper left">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class="gap-patch">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class=" circle-clipper right">
+					          <div class="circle"></div>
+					        </div>
+
+				      </div>
+
+				       <div class="spinner-layer spinner-yellow">
+
+					        <div class="circle-clipper left">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class="gap-patch">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class=" circle-clipper right">
+					          <div class="circle"></div>
+					        </div>
+
+				      </div>
+
+				       <div class="spinner-layer spinner-green">
+
+					        <div class="circle-clipper left">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class="gap-patch">
+					          <div class="circle"></div>
+					        </div>
+
+					        <div class=" circle-clipper right">
+					          <div class="circle"></div>
+					        </div>
+
+				      </div>
+              </div>`;
+            _environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].renderMain(`${html}`,_environment_Main_js__WEBPACK_IMPORTED_MODULE_0__["default"].carouselId());
+            _environment_invoker_js__WEBPACK_IMPORTED_MODULE_2__["default"].showCarousel();
+	        document.getElementById('gobackToExperience').addEventListener('click', function(){
+	        	_environment_invoker_js__WEBPACK_IMPORTED_MODULE_2__["default"].showExperience();
+
+	        });
+  }
+
+}
+
+/***/ }),
+
+/***/ "./environment/invoker.js":
+/*!********************************!*\
+  !*** ./environment/invoker.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return invoker; });
+// import Component from '../environment/component.js'
+class invoker {
+
+  static showCarousel(){
+  
+$b('#carousel').show();
+$b('#education').hide();
+$b('#company').hide();
+$b('#experience').hide();
+$b('#profile').hide();  
+$b(document).ready(function(){
+  $b('.materialboxed').materialbox();
+  $b('.pagination').show();
+  $b('.carousel').carousel({
+    fullWidth:true,
+    padding:100,
+    duration:200,
+    dist:-300,
+    shift:20,
+    noWrap:true,
+    onCycleTo:true
   });
-          this.reRender(`${html}`,document.getElementById("about"));
-          this.showAbout();
+});
+
+}
+ static showProfile(){
+  
+$b('#profile').show();
+$b('#carousel').hide();
+$b('#education').hide();
+$b('#company').hide();
+$b('#experience').hide();
+
+$b(document).ready(function(){
+    $b('.carousel').hide();
+    $b('.pagination').show();
+    $b('.preloader-wrapper').hide();
+   
+    });  
+  }
+
+static showCompany(){
+ 
+$b('#profile').hide();
+$b('#education').hide();
+$b('#company').show();
+$b('#experience').hide();
+$b('#carousel').hide();
+
+$b(document).ready(function(){
+    $b('.carousel').hide();
+    $b('.pagination').show();
+    $b('.preloader-wrapper').hide();
+   
+    }); 
+}
+
+static showEducation(){  
+$b('#profile').hide();
+$b('#education').show();
+$b('#company').hide();
+$b('#experience').hide();
+$b('#carousel').hide();
+
+$b(document).ready(function(){
+    $b('.carousel').hide();
+    $b('.pagination').show();
+    $b('.preloader-wrapper').hide();
+   
+    }); 
+   }
+
+static showExperience(){
+    $b('#experience').show();
+		$b('#carousel').hide();       
+		$b('#profile').hide();
+		$b('#education').hide();
+		$b('#company').hide();
+
+    $b(document).ready(function(){
+    $b('.carousel').hide();
+    $b('.pagination').show();
+    $b('.preloader-wrapper').hide();
+   
+    });
+		
  }
 
-    registration(){        
-     let html = `
-     <div class="lightbox_bg"></div>
-        <div class="lightbox_container"> 
-              <div class="lightbox_close"></div>
-                    <div class="lightbox_content">
+static showPagination(){
 
-                     <div class="container white lighten-2" id="form">
+  $b('.pagination').show();
+}
 
-                          <div class="row">
-                               <div class="col s12">
-                                  <h2 class="section-header white-text darken-20" id="contact-me">Registration</h2>
-                               </div>
+   static showMainNav(){
+    $b('#mainNav').show();
+   }
 
-                             <div class="col 18 offset-12 m12 s12">
-                                <form class="col s12 add" id="insert_user_data" method="get" action="php/user.php">
-                                    <div class="row">
-                                      <div class="input-field col s6">
-                                            <input id="full_name" type="text" class="validate">
-                                            <label for="full_name">Full Name</label>
-                                      </div>
-
-                                      <div class="input-field col s6">
-                                            <input id="country" type="text" class="validate">
-                                            <label for="last_name">Country</label>
-                                      </div>
-                                    </div>
-                                      
-                                        <div class="row">
-                                          <div class="input-field col s6">
-                                            <input id="religion" type="text" class="validate">
-                                            <label for="Religion">Religion</label>
-                                          </div>
-                                    
-                                          <div class="input-field col s6">
-                                            <input id="email" type="email" class="validate">
-                                            <label for="email">Email</label>
-                                          </div>
-                                        </div>
-
-                                    <div class="row">
-                                          <div class="input-field col s6">
-                                            <input id="password" type="password" class="validate">
-                                            <label for="password">Password</label>
-                                          </div>
-
-                                           <div class="input-field col s6">
-                                            <input id="contact" type="text" class="validate">
-                                            <label for="contact">Contact</label>
-                                          </div>
-                                    </div>
-
-                                   <!-- <div class="row">
-                                          <div class="input-field col s6">
-                                            <input id="cnfrmpswd" type="password" class="validate">
-                                            <label for="cnfrmpswd">Confirm Password</label>
-                                          </div> -->
-                                          <div class="input-field col s6">
-                                               <a href="#" id="download-button" value="POST" class="waves-effect btn-large hoverable green accent-8">Submit</a>
-                                          </div>
-                                    </div>
-                                </form>
-                              </div>
-                          </div>
-                      </div>
-                          <div id="message_container">
-                          <div id="message" class="success">
-                          <p>This is a success message</p>
-                      </div>
-                    </div>
-              </div>   
-                     `; this.reRender(`${html}`,document.getElementById("registration1"));
-                      this.showRegistration();   
-              }        
-
-           semifooter(){
-              let html =`
-
-                          <table width="100%" border="0" height="60"> 
-                                <tr valign="top">
-                            <!--<td bgcolor="#aaa" width="2%"> 
-                             </td> -->    
-                                            <td bgcolor="#b5dcb3" width="40%">
-
-                                          Technical and Managerial Tutorials
-                                       </td>
-
-                                        <td bgcolor="#aaa" width="60%"> 
-                  
-                                      </td>
-                               </tr>
-                        <table> 
+}
 
 
-                         `;
-                      this.reRender(`${html}`,document.getElementById("semifooter"));
-                     this.showFooter();   
 
-                 }
+/***/ })
 
-
-                 modalDisplay(){
-
-                  let html = `
-                         <!-- Modal Trigger -->
-                      <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
-
-                      <!-- Modal Structure -->
-                      <div id="modal1" class="modal bottom-sheet">
-                        <div class="modal-content">
-                          <h4>Modal Header</h4>
-                          <p>A bunch of text</p>
-                        </div>
-                        <div class="modal-footer">
-                          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                        </div>
-                      </div>
-  
-                  `;
-                      this.reRender(`${html}`,document.getElementById("minified"));
-                     this.showMinified();  
-                }
-
-                 typography(){
-
-                  let html = `
-
-
-                  `;
-                      this.reRender(`${html}`,document.getElementById("typography"));
-                     this.showVideo();  
-                }
-
-                 typography(){
-
-                  let html = `
-
-
-                  `;
-                      this.reRender(`${html}`,document.getElementById("typography"));
-                     this.showVideo();  
-                }
-
-                 typography(){
-
-                  let html = `
-
-
-                  `;
-                      this.reRender(`${html}`,document.getElementById("typography"));
-                     this.showVideo();  
-                }
-
-                 typography(){
-
-                  let html = `
-
-
-                  `;
-                      this.reRender(`${html}`,document.getElementById("typography"));
-                     this.showVideo();  
-                }
-
-                 typography(){
-
-                  let html = `
-
-
-                  `;
-                      this.reRender(`${html}`,document.getElementById("typography"));
-                     this.showVideo();  
-                }
-
-                 typography(){
-
-                  let html = `
-
-
-                  `;
-                      this.reRender(`${html}`,document.getElementById("typography"));
-                     this.showVideo();  
-                }
-         
-
-                  showIframe(){
-                   $b('#iframe_layout').show();
-                   $b('#minified').hide();
-
-                 }
-
-                 showFooter(){
-                  $b('#semifooter').show();
-                  $b('#about').hide();
-                  $b('#minified').hide();
-                }
-                 showHOme(){
-                  $b('#HOme').show();
-                  $b('#minified').hide();
-                  $b('#about').hide();
-                  $b('#registration1').hide(); 
-                  $b('.carousel.carousel-slider').carousel({full_width: true});
-                  $b(document).ready(function(){
-                  $b('.slider').slider({full_width: true});
-            });
-                }
-
-                 showRegistration(){
-                  $b('#registration1').show(); 
-                  $b('#minified').hide();
-                  $b('#HOme').hide();
-                  $b('#about').hide();
-                  $b('#semifooter').hide();      
-               }
-         
-              showAbout(){
-                  $b('#about').show();
-                    $b('#minified').hide();
-                  $b('#HOme').hide();
-                   $b('#semifooter').hide();
-                    $b('#registration1').hide(); 
-                  $b(document).ready(function(){
-                  $b('.parallax').parallax();      
-              });     
-          }
-
-           showMinified(){
-                   $b('#minified').show();
-                   $b('#about').hide();
-                   $b('#HOme').hide();
-                   $b('#semifooter').hide();
-                   $b('#registration1').hide(); 
-                
-          }
-  }
-            let component = new Component();
-            component.container(); 
-
-   
+/******/ });
+//# sourceMappingURL=main.bundle.js.map

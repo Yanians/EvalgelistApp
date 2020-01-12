@@ -1,20 +1,36 @@
-var spinner = "<img src='images/pi.png' border='0'>";
 var $b = jQuery.noConflict();
+(function($b){ 'use strict';
+$b(document.body).append("<main>","<div style='margin-top:3px;' class='container  border-effectDivMain' id='main'></div>","</main>");
+$b(document.body).append("<footer>","<div class='container-footer' id='footer'></div>","</footer>");
 
-// function GetXMLHttpObject(){
-// 	var xmlHttp = null;
+        $b(document).ready(function(){
+        $b('.fixed-action-left-btn').closeFAB();
+        $b('.fixed-action-left-btn.toolbar').closeToolbar();
+        $b('.fixed-action-left-btn.toolbar').openToolbar();
 
-// 	xmlHttp = new XMLHttpRequest();
+        /* Initialize collapse button*/
+	  $b(".button-collapse").sideNav();      
+	  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+	  $b('.collapsible').collapsible();
 
-// 	try{xmlHttp = new XMLHttpRequest();
-// 	}
-// 	catch(e){
+       });
 
-// 		try{xmlHttp = new ActiveXObject("MSxml2.xmlHttp");
-// 	 }
-// 		catch(e){
-// 			xmlHttp = new ActiveXObject("Microsoft.xmlHttp");
-// 		}
-// 		return xmlHttp = false;
-//     }
-// }
+        // $b('#showProf').click( function(){                        
+        //     $b('#profile').show();
+        //     $b('#education').hide();
+        //     $b('#company').hide();  
+        // });
+
+        //  $b('#showEd').click( function(){                        
+        //     $b('#profile').hide();
+        //     $b('#education').show();
+        //     $b('#company').hide();  
+        // });
+
+        //  $b('#showComp').click( function(){                        
+        //     $b('#profile').hide();
+        //     $b('#education').hide();
+        //     $b('#company').show();  
+        // });
+
+})($b)

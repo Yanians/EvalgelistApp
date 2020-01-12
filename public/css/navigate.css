@@ -11,13 +11,6 @@
     color: #000066;
      }
 
-     .absolute{
-      position:fixed;
-      top: 0;
-      left: 0;
-
-     }
-
        .material-icons.shadow-yellow {
     color: #CCCC00;
      }
@@ -33,17 +26,13 @@
       .navSearch{
       margin-top: 5%;
       padding:7.5%;
+      
       }
 
       .sideNav-parent{
     	background:rgba(123,78,24,1); 
       }
-            .sideNavBootstrap{
-      background:rgba(123,78,24,1); 
-      position:relative;
-      top:9.2%;
-      }
-      
+
         .material-icons.md-18 { font-size: 18px; }
 		.material-icons.md-24 { font-size: 24px; }
 		.material-icons.md-36 { font-size: 36px; }

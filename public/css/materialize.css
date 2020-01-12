@@ -2873,8 +2873,8 @@ footer.page-footer {
 
 footer.page-footer .footer-copyright {
   overflow: hidden;
-  height: 10px;
-  line-height: 10px;
+  height: 50px;
+  line-height: 50px;
   color: rgba(255, 255, 255, 0.8);
   background-color: rgba(51, 51, 51, 0.08);
 }
@@ -3391,9 +3391,10 @@ input[type=range] + .thumb {
 }
 
 .row {
+  margin-top: 0
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .row:after {
@@ -4632,7 +4633,6 @@ small {
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
   color: #ffab40;
   margin-right: 20px;
-  transition: color .3s ease;
   text-transform: uppercase;
 }
 

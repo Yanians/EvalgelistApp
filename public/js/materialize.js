@@ -4223,11 +4223,23 @@ $(document).ready(function(){
     $.fn.reverse = [].reverse;
 
     // Hover behaviour: make sure this doesn't work on .click-to-toggle FABs!
-    $(document).on('mouseenter.fixedActionBtn', '.fixed-action-btn:not(.click-to-toggle):not(.toolbar)', function(e) {
+
+      $(document).on('mouseenter.fixedActionBtn', '.fixed-action-btn:not(.click-to-toggle):not(.toolbar)', function(e) {
       var $this = $(this);
       openFABMenu($this);
     });
+
+    $(document).on('mouseenter.fixedActionBtn', '.fixed-action-left-btn:not(.click-to-toggle):not(.toolbar)', function(e) {
+      var $this = $(this);
+      openFABMenu($this);
+    });
+     
     $(document).on('mouseleave.fixedActionBtn', '.fixed-action-btn:not(.click-to-toggle):not(.toolbar)', function(e) {
+      var $this = $(this);
+      closeFABMenu($this);
+    });
+
+    $(document).on('mouseleave.fixedActionBtn', '.fixed-action-left-btn:not(.click-to-toggle):not(.toolbar)', function(e) {
       var $this = $(this);
       closeFABMenu($this);
     });
@@ -4243,8 +4255,24 @@ $(document).ready(function(){
       }
     });
 
+     $(document).on('click.fabClickToggle', '.fixed-action-left-btn.click-to-toggle > a', function(e) {
+      var $this = $(this);
+      var $menu = $this.parent();
+      if ($menu.hasClass('active')) {
+        closeFABMenu($menu);
+      } else {
+        openFABMenu($menu);
+      }
+    });
+
     // Toolbar transition behaviour.
     $(document).on('click.fabToolbar', '.fixed-action-btn.toolbar > a', function(e) {
+      var $this = $(this);
+      var $menu = $this.parent();
+      FABtoToolbar($menu);
+    });
+
+     $(document).on('click.fabToolbar', '.fixed-action-left-btn.toolbar > a', function(e) {
       var $this = $(this);
       var $menu = $this.parent();
       FABtoToolbar($menu);

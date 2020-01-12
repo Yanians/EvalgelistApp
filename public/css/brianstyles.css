@@ -1,8 +1,59 @@
 body{
 	min-height: auto;
-	background:rgba(45, 54, 47);
+	background:rgba(1, 2, 1, .9);
   opacity: 5; 
-	background-repeat: no-repeat;
+	background:rgba(33,33,33,0.99);
+  /*#006064*/
+}
+
+.container-footer {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+
+.pagination-footer li.active a {
+  color: #fff;
+}
+
+.pagination-footer li {
+  display: inline-block;
+  border-radius: 2px;
+  text-align: center;
+  vertical-align: top;
+  height: 30px;
+}
+
+.pagination-footer li a {
+  color: #444;
+  display: inline-block;
+  font-size: 1rem;
+  padding: 0 8px;
+  line-height: 32px;
+}
+.container-footer .row {
+  margin-left: -2.75rem;
+  margin-right: -2.75rem;
+}
+
+@media only screen and (min-width: 251px) {
+  .container-footer{
+    width: 65%;
+  }
+}
+
+
+@media only screen and (min-width: 661px) {
+  .container-footer {
+    width: 74%;
+  }
+}
+
+
+@media only screen and (min-width: 993px) {
+  .container-footer {
+    width: 70%;
+  }
 }
 
 .logo{
@@ -36,7 +87,7 @@ body{
 	font-weight:300;
 }
 .cta{
-	font-weight: 400;
+	font-weight: 300;
 	text-shadow: 2.5px 2.5px black;
 }
 
@@ -48,20 +99,17 @@ body{
 .cart-title{
   font-weight: 500;
   text-shadow: 2px 2px black;
-  height:20px;
 }
 .activator{
 	width: 150px;
 	height: 250px;
 }
-/*.section{
+.section{
   background:rgba(96, 125, 139, .9);
-}*/
+}
 .divider{
   background:rgba(96, 125, 139, .5);
   background-color: red;
-  position: absolute;
-  top: 10px;
 
 }
 
@@ -70,16 +118,22 @@ body{
 	padding:80px;
 	border-radius: 4px;
 	border-width: 20px;
-	/*border-color: red;*/
+	border-color: red;
 }
-
+#services{	
+	background:rgba(235, 200, 590, .2);
+  border-radius: 10px;
+  text-shadow: 2px 2px black;
+	background-image:url("../images/parallax2.jpg"); 
+	background-repeat: no-repeat;
+}
 #contact-me{
 	text-shadow: 2px 2px violet;
 }
 
 .lightbox_bg {
   display: none;
-  width: 0;
+  width: ;
   height: auto;
   position: relative;
   top: 0;
@@ -151,7 +205,7 @@ body{
 }
 
 .scroll_page{
-  background-image:url("../images/");
+  background-image:url("../images/heaven.jpg");
   background-repeat: no-repeat;
   background-size:27.2em 26.5em; 
   position:auto;
@@ -214,7 +268,7 @@ body{
   border-radius:         6px;
 }
 
-.videobox_close{ 
+.videobox_close{ /*design icon*/
   width: 35px;
   height: 35px;
   position: absolute;
@@ -266,6 +320,7 @@ body{
     color: #CCCC00;
      }
 
+
        .material-icons.shadow-red {
     color: #FF0000;
      }
@@ -282,20 +337,143 @@ body{
     color:red;  
   }
 
-  .fixThis {
-    width: 300px;
-    height: 370px;
+  img.resize-image{
+
+    margin: 0 auto;
+    width: 60%;
+    padding: 0.3em;
+   box-shadow: 0 18px 70px -25px rgba(0, 0, 0,0.5),
+               0 0 15px 15px rgba(1, 0, 0,0.1),
+               0 0 23px -1px rgba(0, 30, 1);
+    border-radius: 0.18em;
+    border-top-width: 1px;
+     background-color:rgb(3,3,6);
   }
 
-  #services{  
-  background:rgba(235, 200, 590, .2);
-  border-radius: 10px;
-  height: auto;
-  text-shadow: 2px 2px black;
+  
+@media only screen and (min-width: 993px) {
+  .div-radius {
+    width: 80%;
+  }
 }
-.about{
-  font-weight:800;
-    text-shadow:  0.5px 0.5px black;
-    color:red;  
-    font-size: 120%;
+
+   .resize-div{
+
+   /* margin: 0 auto;*/
+    /*width: 60%;*/
+    /*padding: 0.3em;*/
+    border: 1px solid black;
+    border-radius: 0.3em;
+  }
+
+.fixed-action-left-btn {
+  margin:0 auto;
+  z-index: 200;
+}
+
+.border-effectDiv{
+ box-shadow:  0 0 0 -90px rgba(0, 0, 0,0.50),
+              0 0 0 0 rgba(1, 0, 0,0.50),
+              0 20px 10px -15px rgba(0, 30, 1);   
+   z-index: 200;
+   -webkit-box-sizing: border-box;
+  -moz-box-sizing:     border-box;
+  box-sizing:          border-box;
+  -webkit-border-radius: 12px;
+  -moz-border-radius:    12px;
+  border-radius:         8px 8px;                    
+              
+}
+
+.border-effectDivMain{
+ box-shadow:  0 1px 02px -90px rgba(0, 0, 0,0.50),
+              0 80px 10px -5px rgba(1, 0, 0,0.10),
+              0 20px 10px -15px rgba(0, 30, 1);
+  background-color: rgba(1,55,56,0.99); 
+   z-index: 200;
+   -webkit-box-sizing: border-box;
+  -moz-box-sizing:     border-box;
+  box-sizing:          border-box;
+  -webkit-border-radius: 6px;
+  -moz-border-radius:    6px;
+  border-radius:         6px;           
+}
+
+.title{
+  font-style:inherit; 
+  text-transform:uppercase;
+  font-size:medium; 
+  font-size-adjust:inherit;
+  font-family: 'Inconsolata', Monaco, Consolas, 'Andale Mono', monospace;
+  direction: ltr;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+/*
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;*/
+
+ /* -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none; */
+}
+
+.text-h3{
+  font-style:initial;
+  text-transform:uppercase;
+  font-size:x-large; 
+  font-size-adjust:inherit;
+  font-family: 'Inconsolata', Monaco, Consolas, 'Andale Mono', monospace; 
+  text-shadow: 2px 1px 2px #004d40;
+  box-shadow:  0 0 0 -99px rgba(255, 0, 0.99),
+               0 5px 0 -99px rgba(0, 255, 0,0.99),
+              0 0 0 -99px rgba(0, 0, 255,0.99);
+  border-radius: 5px;
+ }
+
+.text-h34{
+  font-style:initial;
+  text-transform:uppercase;
+  font-size:xx-large; 
+  font-size-adjust:inherit;
+  font-family: 'Inconsolata', Monaco, Consolas, 'Andale Mono', monospace; 
+  text-shadow: 2px 1px 2px #004d40;
+  border-radius: 5px;
+  box-shadow:  0 0 0 -99px rgba(255, 0, 0, 0.99),
+               0 0 0 -99px rgba(0, 255, 0, 0.99),
+               0 0 0 -99px rgba(0, 0, 255, 0.99);                   
+}
+
+.text-h2{
+  text-transform:uppercase;
+  font-size:smaller;
+  font-family: 'Inconsolata', Monaco, Consolas, 'Andale Mono', monospace;  
+  font-size-adjust:inherit;
+  font-size:24px; 
+   font-style:initial; 
+  text-shadow: 2px 2px black;
+  /*box-shadow:  0 0 0 -90px rgba(0, 0, 0.50),
+               0 0 0 0 rgba(1, 0, 0,0.50),
+              0 20px 10px -10px rgba(0, 30, 1,0.50); */
+  background-color: rgba(0, 102, 102,.12);                     
+}
+
+.border-effect{
+ border-radius: 0.3em;
+ background-color:rgb(1,5,3);
+/* box-shadow: 0 9px 6px -3px rgb(115, 106, 98,0.90),
+              0 2px 80px 0 rgba(131, 112, 80, 0.99),
+              0 9px 1px -50px rgba(0, 0, 0, 0.99);*/
+}
+
+#mod-img{
+  width:80%;
+  height: 40%;
+}
+
+#imgScale{
+  width:80%;
+  height: 40%;
 }
