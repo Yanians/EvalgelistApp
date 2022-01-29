@@ -9,7 +9,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/public');
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
   res.render('app',{title: 'decode App', logo:'decode', message: '<span>decode App is running!</span>'});
 });
  
